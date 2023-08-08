@@ -16,7 +16,7 @@ export default function Steven(props) {
   const { actions } = useAnimations(wavingAnimation, group);
 
   useEffect(() => {
-    actions["Waving"].reset().play();
+    actions["Waving"].play();
   });
 
   return (

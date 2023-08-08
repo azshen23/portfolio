@@ -16,7 +16,7 @@ export default function Galaxy(props) {
 
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
-    actions["Global Rotation"].reset().play();
+    actions["Global Rotation"].play();
   });
   return (
     <group ref={group} {...props} dispose={null} scale={10} position-z={-10}>

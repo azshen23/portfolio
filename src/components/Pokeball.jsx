@@ -1,9 +1,10 @@
-import * as THREE from "three";
+import { MathUtils } from "three";
 import React, { useRef } from "react";
 import { useGLTF, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 const rsqw = (t, delta = 0.1, a = 1, f = 1 / (2 * Math.PI)) =>
   (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
+const fullZoomValue = Math.sin((0.125 * Math.PI) / 3) * 10;
 export default function Pokeball({ getZoomed }) {
   const group = useRef();
   const pokeBallTop = useRef();
@@ -14,7 +15,7 @@ export default function Pokeball({ getZoomed }) {
     const offset = 1 - scroll.offset;
     const r1 = scroll.range(1 / 4, 4 / 4);
 
-    pokeBallTop.current.rotation.x = THREE.MathUtils.lerp(
+    pokeBallTop.current.rotation.x = MathUtils.lerp(
       pokeBallTop.current.rotation.x,
       -(Math.PI / 2) * rsqw(r1),
       0.2
@@ -22,25 +23,21 @@ export default function Pokeball({ getZoomed }) {
 
     state.camera.position.y = 0.25;
     if (offset > 0.125) {
-      state.camera.position.z = THREE.MathUtils.lerp(
+      state.camera.position.z = MathUtils.lerp(
         state.camera.position.z,
         Math.sin((offset * Math.PI) / 3) * 10,
         0.2
       );
     } else {
-      state.camera.position.z = THREE.MathUtils.lerp(
+      state.camera.position.z = MathUtils.lerp(
         state.camera.position.z,
-        Math.sin((0.125 * Math.PI) / 3) * 10,
+        fullZoomValue,
         0.2
       );
     }
     state.camera.lookAt(0, 0, 1);
 
-    if (offset < 0.125) {
-      getZoomed(true);
-    } else {
-      getZoomed(false);
-    }
+    getZoomed(offset < 0.125);
   });
   return (
     <group ref={group} dispose={null}>
