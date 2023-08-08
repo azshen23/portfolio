@@ -48,6 +48,9 @@ function App() {
 
   const getZoomed = (zoom) => {
     setZoomed(zoom);
+    if (zoom == false) {
+      setDialogueFin(false);
+    }
   };
 
   const handlePlay = () => {
@@ -119,6 +122,19 @@ function App() {
                 duration: 1,
               }}
             ></motion.i>
+          </motion.div>
+        )}
+        {dialogueFin && isZoomed && (
+          <motion.div
+            className="box absolute bottom-72 right-96 text-xl m-auto rounded-md pt-8 pr-8 pl-8 w-1/6 h-1/4 bg-white leading-10 border-8 border-white"
+            initial={{ x: 300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -300, opacity: 0 }}
+          >
+            <h1 className="hover:underline">About Me</h1>
+            <h1 className="hover:underline">Projects</h1>
+            <h1 className="hover:underline">Contact Me</h1>
+            <h1 className="hover:underline">Services</h1>
           </motion.div>
         )}
       </AnimatePresence>
