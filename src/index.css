@@ -60,3 +60,34 @@ svg {
     height: 60vh;
   }
 }
+
+.box {
+  font-size: 24px;
+  font-family: "Pokemon GB", Arial, sans-serif;
+  border-radius: 2px;
+  margin: 10px, 10px, 0px, 0px;
+  padding: 20px 8px 8px 20px;
+  width: 60vw;
+  height: 220px;
+  line-height: 40px;
+  background: white;
+  border: 7px solid white;
+  box-shadow: 0 2px 0 2px black, inset 0 2px 0 2px black, 0 0 0 2px black,
+    inset 0 0 0 2px black;
+}
+.box > i {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-top-color: black;
+  margin-top: 23px;
+  float: right;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}

@@ -5,11 +5,12 @@ import { useFrame } from "@react-three/fiber";
 
 const rsqw = (t, delta = 0.1, a = 1, f = 1 / (2 * Math.PI)) =>
   (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
-export default function Pokeball(props) {
+export default function Pokeball({ getZoomed }) {
   const group = useRef();
   const pokeBallTop = useRef();
   const { nodes, materials } = useGLTF("src/assets/twinleafBall.glb");
   const scroll = useScroll();
+
   useFrame((state) => {
     const offset = 1 - scroll.offset;
     const r1 = scroll.range(1 / 4, 4 / 4);
@@ -35,9 +36,15 @@ export default function Pokeball(props) {
       );
     }
     state.camera.lookAt(0, 0, 1);
+
+    if (offset < 0.125) {
+      getZoomed(true);
+    } else {
+      getZoomed(false);
+    }
   });
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group} dispose={null}>
       <group name="Scene">
         <mesh
           name="House01"

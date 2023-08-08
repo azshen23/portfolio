@@ -11,8 +11,8 @@ export default function Steven(props) {
   const { nodes, materials } = useGLTF("src/assets/steven.glb");
 
   const { animations: wavingAnimation } = useFBX("src/assets/Waving.fbx");
-  wavingAnimation[0].name = "Waving";
 
+  wavingAnimation[0].name = "Waving";
   const { actions } = useAnimations(wavingAnimation, group);
 
   useEffect(() => {
