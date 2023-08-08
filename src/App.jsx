@@ -44,6 +44,7 @@ const words =
 function App() {
   const [isZoomed, setZoomed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [dialogueFin, setDialogueFin] = useState(false);
 
   const getZoomed = (zoom) => {
     setZoomed(zoom);
@@ -87,12 +88,19 @@ function App() {
       <AnimatePresence>
         {isZoomed && (
           <motion.div
-            className="box absolute bottom-10 left-0 right-0 font-2xl m-auto"
+            className="box absolute bottom-10 left-0 right-0 text-xl m-auto rounded-md pt-8 pr-8 pl-8 w-3/5 h-56 bg-white leading-10 border-8 border-white"
             initial={{ x: 300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -300, opacity: 0 }}
           >
-            <motion.div variants={container} initial="hidden" animate="visible">
+            <motion.div
+              variants={container}
+              initial="hidden"
+              animate="visible"
+              onAnimationComplete={() => {
+                setDialogueFin(true);
+              }}
+            >
               {memoizedWords.map((word, index) => (
                 <motion.span
                   variants={child}
