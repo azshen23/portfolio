@@ -4,7 +4,7 @@ import { OrbitControls, ScrollControls } from "@react-three/drei";
 import Pokeball from "./components/Pokeball";
 import Steven from "./components/Steven";
 import Galaxy from "./components/Galaxy";
-import { motion, AnimatePresence, delay } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
   const [isZoomed, setZoomed] = useState(false);
