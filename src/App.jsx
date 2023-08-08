@@ -126,10 +126,12 @@ function App() {
             ></motion.i>
           </motion.div>
         )}
+      </AnimatePresence>
+      <AnimatePresence>
         {dialogueFin && isZoomed && (
           <motion.div
             className="box absolute bottom-72 md:right-40 lg:right-64 xl:right-96 lg:text-lg xl:text-xl m-auto 
-            rounded-md md:pt-6 lg:pt-7 xl:pt-8 pr-8 pl-8 lg:w-1/4 xl:w-1/5 2xl:w-1/6 h-1/4 bg-white leading-9 
+            rounded-md md:pt-6 lg:pt-7 xl:pt-8 pr-8 pl-8 lg:w-1/4 xl:w-1/5 2xl:w-1/6 h-1/4 bg-white xl:leading-8 2xl:leading-10
             border-8 border-white"
             initial={{ x: 300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
