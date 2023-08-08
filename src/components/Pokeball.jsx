@@ -2,13 +2,12 @@ import * as THREE from "three";
 import React, { useRef } from "react";
 import { useGLTF, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-
 const rsqw = (t, delta = 0.1, a = 1, f = 1 / (2 * Math.PI)) =>
   (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
 export default function Pokeball({ getZoomed }) {
   const group = useRef();
   const pokeBallTop = useRef();
-  const { nodes, materials } = useGLTF("src/assets/twinleafBall.glb");
+  const { nodes, materials } = useGLTF("/models/twinleafBall.glb");
   const scroll = useScroll();
 
   useFrame((state) => {
@@ -1185,4 +1184,4 @@ export default function Pokeball({ getZoomed }) {
   );
 }
 
-useGLTF.preload("src/assets/twinleafBall.glb");
+useGLTF.preload("/models/twinleafBall.glb");

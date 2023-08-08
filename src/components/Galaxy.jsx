@@ -12,7 +12,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 
 export default function Galaxy(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF("src/assets/galaxy.glb");
+  const { nodes, materials, animations } = useGLTF("/models/galaxy.glb");
 
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
@@ -68,4 +68,4 @@ export default function Galaxy(props) {
   );
 }
 
-useGLTF.preload("src/assets/galaxy.glb");
+useGLTF.preload("/models/galaxy.glb");

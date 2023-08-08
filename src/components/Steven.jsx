@@ -8,9 +8,9 @@ import { useGLTF, useFBX, useAnimations } from "@react-three/drei";
 
 export default function Steven(props) {
   const group = useRef();
-  const { nodes, materials } = useGLTF("src/assets/steven.glb");
+  const { nodes, materials } = useGLTF("/models/steven.glb");
 
-  const { animations: wavingAnimation } = useFBX("src/assets/Waving.fbx");
+  const { animations: wavingAnimation } = useFBX("/models/Waving.fbx");
 
   wavingAnimation[0].name = "Waving";
   const { actions } = useAnimations(wavingAnimation, group);
@@ -49,4 +49,4 @@ export default function Steven(props) {
   );
 }
 
-useGLTF.preload("src/assets/steven.glb");
+useGLTF.preload("/models/steven.glb");
