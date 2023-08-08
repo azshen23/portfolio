@@ -44,7 +44,7 @@ const words =
 
 export default function Home() {
   const [isZoomed, setZoomed] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isZoomedOut, setZoomedOut] = useState(true);
   const [dialogueFin, setDialogueFin] = useState(false);
 
   const getZoomed = (zoom) => {
@@ -54,29 +54,17 @@ export default function Home() {
     }
   };
 
-  const handlePlay = () => {
-    setIsPlaying(true);
+  const getZoomedOut = (zoom) => {
+    setZoomedOut(zoom);
   };
-
-  const handlePause = () => {
-    setIsPlaying(false);
-  };
-
   const memoizedWords = useMemo(() => words, []);
   return (
     <div className="absolute w-full h-full">
-      <audio
-        src={twinleafTheme}
-        controls={isPlaying}
-        onPlay={handlePlay}
-        onPause={handlePause}
-      />
-
       <Canvas className="canvas bg-gray-800 w-full h-full absolute">
         <ScrollControls pages={2}>
           <ambientLight intensity={2} />
 
-          <Pokeball getZoomed={getZoomed} />
+          <Pokeball getZoomed={getZoomed} getZoomedOut={getZoomedOut} />
           <Steven />
           <Galaxy />
 
@@ -92,7 +80,7 @@ export default function Home() {
       <AnimatePresence>
         {isZoomed && (
           <motion.div
-            className="box absolute bottom-10 left-0 right-0 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl md:m-auto
+            className="box absolute bottom-10 left-0 right-0 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl m-auto
             rounded-md pt-6 lg:pt-8 pr-8 pl-2 sm:pl-0 md:pl-8 sm:w-full md:w-3/5 sm:h-60 md:h-56 bg-white 
             xl:leading-8 2xl:leading-10 border-8 border-white"
             initial={{ x: 300, opacity: 0 }}
@@ -119,10 +107,13 @@ export default function Home() {
             </motion.div>
 
             <motion.i
-              animate={{ y: 10 }}
+              animate={{
+                y: [0, 5, 0],
+              }}
               transition={{
+                duration: 1.5,
                 repeat: Infinity,
-                duration: 1,
+                repeatType: "loop",
               }}
             ></motion.i>
           </motion.div>
@@ -153,6 +144,25 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
+      {isZoomedOut && (
+        <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
+          <a>
+            <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
+              <motion.div
+                animate={{
+                  y: [0, 24, 0],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                }}
+                className="w-3 h-3 rounded-full bg-red-500 mb-1"
+              />
+            </div>
+          </a>
+        </div>
+      )}
     </div>
   );
 }

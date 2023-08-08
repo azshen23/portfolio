@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber";
 const rsqw = (t, delta = 0.1, a = 1, f = 1 / (2 * Math.PI)) =>
   (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
 const fullZoomValue = Math.sin((0.125 * Math.PI) / 3) * 10;
-export default function Pokeball({ getZoomed }) {
+export default function Pokeball({ getZoomed, getZoomedOut }) {
   const group = useRef();
   const pokeBallTop = useRef();
   const { nodes, materials } = useGLTF("/models/twinleafBall.glb");
@@ -38,6 +38,7 @@ export default function Pokeball({ getZoomed }) {
     state.camera.lookAt(0, 0, 1);
 
     getZoomed(offset < 0.125);
+    getZoomedOut(offset > 0.8);
   });
   return (
     <group ref={group} dispose={null}>
