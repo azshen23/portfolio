@@ -5,8 +5,7 @@
 
 @font-face {
   font-family: "Pokemon"; /*Can be any text*/
-  src: local("PokemonGb-RAeo"),
-    url("fonts/PokemonGb-RAeo.ttf") format("truetype");
+  src: local("Pokemon"), url("/fonts/Pokemon.woff2") format("truetype");
 }
 
 * {
