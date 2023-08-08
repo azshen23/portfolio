@@ -20,6 +20,7 @@ main {
 body {
   cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iI0U4QjA1OSIvPjwvc3ZnPg=="),
     auto;
+  overflow: overlay;
 }
 
 main {
@@ -87,7 +88,22 @@ svg {
   float: right;
 }
 
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent; /* make scrollbar transparent */
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #8f54a0 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #f0310f;
+  border-radius: 10px;
 }
