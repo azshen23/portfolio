@@ -17,57 +17,13 @@ function About() {
         {isFlipped ? (
           <motion.div
             onClick={toggleCard}
-            className="border-4 border-black rounded-xl w-4/6 flex flex-col bg-box14 bg-cover pb-60 pl-2 pr-2 pt-1 hover:cursor-pointer"
+            className="border-4 border-black rounded-xl w-4/6 h-[600px] flex flex-col bg-box14 bg-cover pl-2 pt-1 pr-2 hover:cursor-pointer"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-          >
-            <div className="flex flex-row items-center">
-              <div className="w-10 pb-2">
-                <img src={pokeball} object-fit="contain"></img>
-              </div>
-              <h1 className="text-4xl font-bold text-white pl-1 pr-1 pt-2 -pb-1">
-                TRAINER CARD
-              </h1>
-              <div className="w-10 pb-2">
-                <img src={pokeball} object-fit="contain"></img>
-              </div>
-            </div>
-            <div className="flex flex-row">
-              <div className="flex flex-col w-3/5">
-                <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-                  <h1>PHONENo.</h1>
-                  <h1 className="font-light">2482503985</h1>
-                </div>
-                <div className="pt-2"></div>
-                <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-                  <h1>NAME</h1>
-                  <h1>Andrew Shen</h1>
-                </div>
-                <div className="pt-8"></div>
-                <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-                  <h1>MONEY</h1>
-                  <h1>234234</h1>
-                </div>
-                <div className="pt-8"></div>
-                <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-                  <h1>POKEDEX</h1>
-                  <h1>477</h1>
-                </div>
-                <div className="pt-8"></div>
-                <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-                  <h1>SCORE</h1>
-                  <h1>12321</h1>
-                </div>
-              </div>
-              <div className="w-2/5 flex flex-col">
-                <div></div>
-                <div></div>
-              </div>
-            </div>
-          </motion.div>
+          ></motion.div>
         ) : (
           <motion.div
             className="border-4 border-black rounded-xl w-4/6 h-[600px] flex flex-col bg-box14 bg-cover pl-2 pt-1 pr-2 hover:cursor-pointer"
