@@ -47,7 +47,7 @@ function About() {
           ></motion.div>
         ) : (
           <motion.div
-            className="border-4 border-black rounded-xl w-4/6 h-[600px] flex flex-col bg-box14 bg-cover pl-2 pt-1 pr-2 hover:cursor-pointer"
+            className="border-4 border-black rounded-xl w-4/6 h-[600px] flex flex-col bg-box14 bg-cover pl-2 pt-1 pr-2 hover:cursor-pointer select-none"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             initial={{ opacity: 1, y: 0 }}
@@ -78,7 +78,7 @@ function About() {
                   <h1 className="font-bold">Andrew Shen</h1>
                 </div>
                 <div className="pt-8"></div>
-                <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
+                <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0 ">
                   <h1>EMAIL</h1>
                   <h1 className="font-bold">azshen@umich.edu</h1>
                 </div>
