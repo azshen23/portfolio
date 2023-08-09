@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ErrorPage from "./error-page";
 import "./index.css";
 import Home from "./pages/Home";
@@ -9,31 +9,17 @@ import Contact from "./pages/Contact";
 import Projects from "./pages/Projects";
 import Services from "./pages/Services";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "about",
-    element: <About />,
-  },
-  {
-    path: "contact",
-    element: <Contact />,
-  },
-  {
-    path: "projects",
-    element: <Projects />,
-  },
-  {
-    path: "services",
-    element: <Services />,
-  },
-]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/*" element={<ErrorPage />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
