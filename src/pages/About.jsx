@@ -20,7 +20,7 @@ function About() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
-    }, 60000); // Update every minute (60000 milliseconds)
+    }, 30000); // Update every minute (60000 milliseconds)
 
     return () => {
       clearInterval(intervalId); // Cleanup interval on component unmount
@@ -93,7 +93,7 @@ function About() {
                 </div>
                 <div className="pt-8"></div>
                 <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-                  <h1>LinkedIn</h1>
+                  <h1>LINKEDIN</h1>
                   <h1 className="font-bold hover:underline" onClick={stopEvent}>
                     <a href="https://linkedin.com/in/azshen23" target="_blank">
                       /azshen23
