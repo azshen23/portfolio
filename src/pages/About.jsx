@@ -1,18 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Header from "../components/Header";
 import pokeball from "/src/assets/images/cardPokeball.png";
 import pfp from "/src/assets/images/pfp.jpg";
 
 function About() {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   const toggleCard = () => {
     setIsFlipped(!isFlipped);
     console.log("hello");
   };
 
+  const stopEvent = (e) => {
+    e.stopPropagation(); // This prevents the div's click event from firing
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60000); // Update every minute (60000 milliseconds)
+
+    return () => {
+      clearInterval(intervalId); // Cleanup interval on component unmount
+    };
+  }, []);
+
+  const formattedTime = `${currentTime.getHours()}:${String(
+    currentTime.getMinutes()
+  ).padStart(2, "0")}`;
   return (
-    <div className="h-screen w-full flex flex-col items-center pt-20 pokemonFont">
+    <div className="h-screen w-full flex flex-col items-center pokemonFont bg-gradient-to-b from-slate-800 to-sky-700">
+      <Header />
+      <div className="pt-12"></div>
       <AnimatePresence>
         {isFlipped ? (
           <motion.div
@@ -49,27 +70,35 @@ function About() {
               <div className="flex flex-col w-3/5">
                 <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
                   <h1>PHONENo.</h1>
-                  <h1 className="font-light">2482503985</h1>
+                  <h1 className="font-light">248-250-3985</h1>
                 </div>
                 <div className="pt-2"></div>
                 <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
                   <h1>NAME</h1>
-                  <h1>Andrew Shen</h1>
+                  <h1 className="font-bold">Andrew Shen</h1>
                 </div>
                 <div className="pt-8"></div>
                 <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-                  <h1>MONEY</h1>
-                  <h1>234234</h1>
+                  <h1>EMAIL</h1>
+                  <h1 className="font-bold">azshen@umich.edu</h1>
                 </div>
                 <div className="pt-8"></div>
                 <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-                  <h1>POKEDEX</h1>
-                  <h1>477</h1>
+                  <h1>GITHUB</h1>
+                  <h1 className="font-bold hover:underline" onClick={stopEvent}>
+                    <a href="https://github.com/azshen23" target="_blank">
+                      /azshen23
+                    </a>
+                  </h1>
                 </div>
                 <div className="pt-8"></div>
                 <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-                  <h1>SCORE</h1>
-                  <h1>12321</h1>
+                  <h1>LinkedIn</h1>
+                  <h1 className="font-bold hover:underline" onClick={stopEvent}>
+                    <a href="https://linkedin.com/in/azshen23" target="_blank">
+                      /azshen23
+                    </a>
+                  </h1>
                 </div>
               </div>
               <div className="w-2/5 flex flex-col items-center">
@@ -85,17 +114,33 @@ function About() {
             <div className="">
               <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
                 <h1>TIME</h1>
-                <h1>50:58</h1>
+                <h1>{formattedTime}</h1>
               </div>
               <div className="pt-2"></div>
               <div className="flex flex-1 flex-row text-2xl border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
                 <h1>ADVENTURE STARTED</h1>
-                <h1>Jun. 24, 2001</h1>
+                <h1>
+                  <span className="font-bold">Jun.</span> 24, 2001
+                </h1>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+      <div className="pt-10"></div>
+      <motion.h1
+        className="text-white text-xl font-bold items-center flex flex-col justify-center"
+        animate={{
+          y: [0, 16, 0],
+        }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          repeatType: "loop",
+        }}
+      >
+        Click!
+      </motion.h1>
     </div>
   );
 }
