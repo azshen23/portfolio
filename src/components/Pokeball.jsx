@@ -1,5 +1,5 @@
 import { MathUtils } from "three";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useGLTF, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 const rsqw = (t, delta = 0.1, a = 1, f = 1 / (2 * Math.PI)) =>
@@ -38,7 +38,7 @@ export default function Pokeball({ getZoomed, getZoomedOut }) {
     state.camera.lookAt(0, 0, 1);
 
     getZoomed(offset < 0.125);
-    getZoomedOut(offset > 0.8);
+    getZoomedOut(offset > 0.7);
   });
   return (
     <group ref={group} dispose={null}>

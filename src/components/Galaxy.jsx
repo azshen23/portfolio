@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/need-some-space-d6521362b37b48e3a82bce49
 Title: Need some space?
 */
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
 export default function Galaxy(props) {

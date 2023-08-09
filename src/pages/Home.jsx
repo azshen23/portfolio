@@ -5,7 +5,6 @@ import Pokeball from "../components/Pokeball";
 import Steven from "../components/Steven";
 import Galaxy from "../components/Galaxy";
 import { motion, AnimatePresence } from "framer-motion";
-import twinleafTheme from "/sound/twinleafTown.mp3";
 import { Link } from "react-router-dom";
 
 const container = {
@@ -80,7 +79,7 @@ export default function Home() {
       <AnimatePresence>
         {isZoomed && (
           <motion.div
-            className="box absolute bottom-10 left-0 right-0 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl m-auto
+            className="box pokemonFont absolute bottom-10 left-0 right-0 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl m-auto
             rounded-md pt-6 lg:pt-8 pr-8 pl-2 sm:pl-0 md:pl-8 sm:w-full md:w-3/5 sm:h-60 md:h-56 bg-white 
             xl:leading-8 2xl:leading-10 border-8 border-white"
             initial={{ x: 300, opacity: 0 }}
@@ -122,7 +121,7 @@ export default function Home() {
       <AnimatePresence>
         {dialogueFin && isZoomed && (
           <motion.div
-            className="box absolute bottom-72 md:right-40 lg:right-64 xl:right-96 lg:text-lg xl:text-xl m-auto 
+            className="box pokemonFont absolute bottom-72 md:right-40 lg:right-64 xl:right-96 lg:text-lg xl:text-xl m-auto 
             rounded-md md:pt-6 lg:pt-7 pr-8 pl-8 lg:w-1/4 xl:w-1/5 2xl:w-1/6 h-1/4 bg-white xl:leading-8 2xl:leading-10
             border-8 border-white"
             initial={{ x: 300, opacity: 0 }}
@@ -145,22 +144,33 @@ export default function Home() {
         )}
       </AnimatePresence>
       {isZoomedOut && (
-        <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
-          <a>
-            <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
-              <motion.div
-                animate={{
-                  y: [0, 24, 0],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                }}
-                className="w-3 h-3 rounded-full bg-red-500 mb-1"
-              />
-            </div>
-          </a>
+        <div className="absolute xs:bottom-10 bottom-32 w-full flex flex-col justify-center items-center">
+          <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
+            <motion.div
+              animate={{
+                y: [0, 24, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+              className="w-3 h-3 rounded-full bg-red-500 mb-2"
+            />
+          </div>
+          <motion.h1
+            className="text-red-500 text-lg font-bold mt-1"
+            animate={{
+              y: [0, 16, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "loop",
+            }}
+          >
+            Scroll!
+          </motion.h1>
         </div>
       )}
     </div>
