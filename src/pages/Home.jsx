@@ -169,7 +169,7 @@ export default function Home() {
               repeatType: "loop",
             }}
           >
-            Scroll!
+            Scroll
           </motion.h1>
         </div>
       )}

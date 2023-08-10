@@ -94,3 +94,8 @@ svg {
   background-color: #f0310f;
   border-radius: 10px;
 }
+
+.front,
+.back {
+  backface-visibility: hidden;
+}
