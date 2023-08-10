@@ -45,12 +45,19 @@ export default function Home() {
   const [isZoomed, setZoomed] = useState(false);
   const [isZoomedOut, setZoomedOut] = useState(true);
   const [dialogueFin, setDialogueFin] = useState(false);
+  const [isSkipped, setIsSkipped] = useState(false);
 
   const getZoomed = (zoom) => {
     setZoomed(zoom);
     if (zoom == false) {
       setDialogueFin(false);
+      setIsSkipped(false);
     }
+  };
+
+  const skip = () => {
+    setIsSkipped(true);
+    setDialogueFin(true);
   };
 
   const getZoomedOut = (zoom) => {
@@ -82,28 +89,36 @@ export default function Home() {
             className="box pokemonFont absolute bottom-10 left-0 right-0 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl m-auto
             rounded-md pt-6 lg:pt-8 pr-8 pl-2 sm:pl-0 md:pl-8 sm:w-full md:w-3/5 sm:h-60 md:h-56 bg-white 
             xl:leading-8 2xl:leading-10 border-8 border-white"
+            onClick={skip}
             initial={{ x: 300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -300, opacity: 0 }}
           >
-            <motion.div
-              variants={container}
-              initial="hidden"
-              animate="visible"
-              onAnimationComplete={() => {
-                setDialogueFin(true);
-              }}
-            >
-              {memoizedWords.map((word, index) => (
-                <motion.span
-                  variants={child}
-                  key={index}
-                  style={{ marginRight: "3px" }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </motion.div>
+            {isSkipped ? (
+              <div>
+                Hello! My name is Andrew and I am a Full Stack Software Engineer
+                and Consultant. Check out these links to learn more!
+              </div>
+            ) : (
+              <motion.div
+                variants={container}
+                initial="hidden"
+                animate="visible"
+                onAnimationComplete={() => {
+                  setDialogueFin(true);
+                }}
+              >
+                {memoizedWords.map((word, index) => (
+                  <motion.span
+                    variants={child}
+                    key={index}
+                    style={{ marginRight: "3px" }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </motion.div>
+            )}
 
             <motion.i
               animate={{
