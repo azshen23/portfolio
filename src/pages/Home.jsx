@@ -1,9 +1,9 @@
 import { Canvas } from "@react-three/fiber";
 import { useState, useMemo } from "react";
 import { OrbitControls, ScrollControls } from "@react-three/drei";
-import Pokeball from "../components/Pokeball";
-import Steven from "../components/Steven";
-import Galaxy from "../components/Galaxy";
+import Pokeball from "../components/Home/Pokeball";
+import Steven from "../components/Home/Steven";
+import Galaxy from "../components/Home/Galaxy";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -56,8 +56,10 @@ export default function Home() {
   };
 
   const skip = () => {
-    setIsSkipped(true);
-    setDialogueFin(true);
+    if (!dialogueFin) {
+      setIsSkipped(true);
+      setDialogueFin(true);
+    }
   };
 
   const getZoomedOut = (zoom) => {
@@ -88,7 +90,7 @@ export default function Home() {
           <motion.div
             className="box pokemonFont absolute bottom-10 left-0 right-0 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl m-auto
             rounded-md pt-6 lg:pt-8 pr-8 pl-2 sm:pl-0 md:pl-8 sm:w-full md:w-3/5 sm:h-60 md:h-56 bg-white 
-            xl:leading-8 2xl:leading-10 border-8 border-white"
+            xl:leading-8 2xl:leading-10 border-8 border-white select-none"
             onClick={skip}
             initial={{ x: 300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -138,7 +140,7 @@ export default function Home() {
           <motion.div
             className="box pokemonFont absolute bottom-72 md:right-40 lg:right-64 xl:right-96 lg:text-lg xl:text-xl m-auto 
             rounded-md md:pt-6 lg:pt-7 pr-8 pl-8 lg:w-1/4 xl:w-1/5 2xl:w-1/6 h-1/4 bg-white xl:leading-8 2xl:leading-10
-            border-8 border-white"
+            border-8 border-white select-none"
             initial={{ x: 300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -300, opacity: 0 }}
