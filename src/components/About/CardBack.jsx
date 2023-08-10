@@ -36,7 +36,7 @@ function CardBack({ isFlipped }) {
       className="back w-full h-full items-center flex flex-col pt-8 pl-10 pr-10"
     >
       <div className="flex flex-col font-bold w-full">
-        <h1 className="flex flex-col w-full text-center text-2xl">
+        <h1 className="flex flex-col w-full text-center text-2xl pb-5">
           TECH STACK
         </h1>
         <div class="grid grid-cols-4 gap-12 w-full  ">
