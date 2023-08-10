@@ -18,8 +18,7 @@ function Bio() {
         <h1>
           I enjoy basketabll, playing the piano, video games (if you can't tell
           already lol), anime, kpop, and working out! I also love to learn new
-          things, regardless if it deals with tech or not! Currently, in my free
-          time, I'm learning Japanese!
+          things, regardless if it deals with tech or not!
         </h1>
       </div>
     </div>
