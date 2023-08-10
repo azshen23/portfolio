@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import pokeball from "/src/assets/images/cardPokeball.png";
-import pfp from "/src/assets/images/pfp.jpg";
+import pokeball from "/src/assets/images/About/cardPokeball.png";
+import pfp from "/src/assets/images/About/pfp.jpg";
 
 function CardFront({ toggleCard, isFlipped }) {
   const [currentTime, setCurrentTime] = useState(new Date());

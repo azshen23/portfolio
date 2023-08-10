@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        box14: "url('/src/assets/images/box14.png')",
+        box14: "url('/src/assets/images/About/box14.png')",
       },
     },
   },
