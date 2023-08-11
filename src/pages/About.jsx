@@ -19,7 +19,7 @@ function About() {
       <div className="pt-12"></div>
       <motion.div
         onClick={toggleCard}
-        className="border-4 border-red-500 rounded-xl w-4/6 h-[600px] flex flex-col bg-box14 bg-cover pl-2 pt-1 pr-2 hover:cursor-pointer "
+        className="border-4 border-black rounded-xl w-4/6 h-[600px] flex flex-col bg-box14 bg-cover pl-2 pt-1 pr-2 hover:cursor-pointer "
         transition={{ duration: 0.3 }}
         whileHover={{ scale: 1.05 }}
         animate={{ rotateY: isFlipped ? 0 : 180 }}

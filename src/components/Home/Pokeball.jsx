@@ -41,7 +41,7 @@ export default function Pokeball({ getZoomed, getZoomedOut }) {
     getZoomedOut(offset > 0.7);
   });
   return (
-    <group ref={group} dispose={null}>
+    <group ref={group} dispose={null} onScroll={scroll}>
       <group name="Scene">
         <mesh
           name="House01"

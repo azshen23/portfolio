@@ -1,7 +1,7 @@
 function Bio() {
   return (
     <div className="flex flex-col items-center">
-      <div className="box bg-white p-5 border-4 m-2 text-center  w-3/5">
+      <div className="box bg-white p-5 border-4 m-2 text-center  w-2/5">
         <h1>Hi, nice to meet you, I'm Andrew!</h1>
         <h1 className="pb-10 pt-10">
           I'm a 22 year old Full Stack Software Engineer and Consultant based in

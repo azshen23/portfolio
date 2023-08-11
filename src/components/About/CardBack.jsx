@@ -41,9 +41,14 @@ function CardBack({ isFlipped }) {
         </h1>
         <div class="grid grid-cols-4 gap-12 w-full  ">
           {logos.map((link, index) => (
-            <div class="w-24" key={index}>
-              <img className="w-full h-full" src={link} />
-            </div>
+            <motion.div
+              class="w-24"
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <img className="w-full h-full svg" src={link} />
+            </motion.div>
           ))}
         </div>
       </div>
