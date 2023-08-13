@@ -14,12 +14,12 @@ function About() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center pokemonFont bg-gradient-to-b from-slate-800 to-sky-700 select-none">
+    <div className="w-full flex flex-col items-center bg-gradient-to-b from-slate-800 to-sky-700 select-none">
       <Header />
       <div className="pt-12"></div>
       <motion.div
         onClick={toggleCard}
-        className="border-4 border-black rounded-xl w-4/6 h-[600px] flex flex-col bg-box14 bg-cover pl-2 pt-1 pr-2 hover:cursor-pointer "
+        className="border-4 border-black rounded-xl w-4/6 h-[600px] flex flex-col bg-box14 bg-cover pl-2 pt-1 pr-2 hover:cursor-pointer pokemonFont"
         transition={{ duration: 0.3 }}
         whileHover={{ scale: 1.05 }}
         animate={{ rotateY: isFlipped ? 0 : 180 }}
@@ -41,7 +41,7 @@ function About() {
 
       <div className="pt-10"></div>
       <motion.h1
-        className="text-white text-xl font-bold items-center flex flex-col justify-center"
+        className="text-white text-xl font-bold items-center flex flex-col justify-center pokemonFont"
         animate={{
           y: [0, 16, 0],
         }}
