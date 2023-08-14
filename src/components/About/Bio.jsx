@@ -3,7 +3,11 @@ import pokeball from "/src/assets/images/About/cardPokeball.png";
 import redWalking from "/src/assets/images/About/redWalking.gif";
 
 const history = [
-  { Name: "Freelance", Date: "12/2022 - Preset", Title: "Software Consulting" },
+  {
+    Name: "Freelance",
+    Date: "12/2022 - Present",
+    Title: "Software Consulting",
+  },
   {
     Name: "The University of Michigan",
     Date: "12/2022",
@@ -67,7 +71,7 @@ function Bio() {
                 <motion.div
                   class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow"
                   whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  transition={{ type: "`spring", stiffness: 400, damping: 10 }}
                 >
                   <div class="flex items-center justify-between space-x-2 mb-1">
                     <div class="font-bold text-slate-900">{item.Name}</div>

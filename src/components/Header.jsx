@@ -23,6 +23,9 @@ function Header() {
         <Link to="/services" className="hover:underline text-xl font-bold">
           Services
         </Link>
+        <Link to="/services" className="hover:underline text-xl font-bold">
+          Contact
+        </Link>
       </div>
     </div>
   );
