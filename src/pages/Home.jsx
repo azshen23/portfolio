@@ -75,14 +75,6 @@ export default function Home() {
           <Pokeball getZoomed={getZoomed} getZoomedOut={getZoomedOut} />
           <Steven />
           <Galaxy />
-
-          <OrbitControls
-            enablePan={false}
-            enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-            enableRotate={false}
-          />
         </ScrollControls>
       </Canvas>
       <AnimatePresence>

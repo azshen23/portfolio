@@ -22,7 +22,7 @@ export default function Pokeball({ getZoomed, getZoomedOut }) {
     );
 
     state.camera.position.y = 0.25;
-    if (offset > 0.125) {
+    if (offset > 0.14) {
       state.camera.position.z = MathUtils.lerp(
         state.camera.position.z,
         Math.sin((offset * Math.PI) / 3) * 10,
@@ -37,7 +37,7 @@ export default function Pokeball({ getZoomed, getZoomedOut }) {
     }
     state.camera.lookAt(0, 0, 1);
 
-    getZoomed(offset < 0.125);
+    getZoomed(offset < 0.14);
     getZoomedOut(offset > 0.7);
   });
   return (
