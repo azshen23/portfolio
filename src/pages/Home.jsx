@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { useState, useMemo } from "react";
-import { OrbitControls, ScrollControls } from "@react-three/drei";
+import { ScrollControls } from "@react-three/drei";
 import Pokeball from "../components/Home/Pokeball";
 import Steven from "../components/Home/Steven";
 import Galaxy from "../components/Home/Galaxy";

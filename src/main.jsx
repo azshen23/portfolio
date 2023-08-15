@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Projects from "./pages/Projects";
 import Services from "./pages/Services";
+import registerServiceWorker from "./registerServiceWorker";
 
 const router = createBrowserRouter([
   {
@@ -37,3 +38,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
+registerServiceWorker();
