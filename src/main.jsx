@@ -32,11 +32,6 @@ const router = createBrowserRouter([
     element: <Services />,
   },
 ]);
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
 // Check if the browser supports service workers
 if ("serviceWorker" in navigator) {
   // Unregister the old service worker
@@ -48,3 +43,9 @@ if ("serviceWorker" in navigator) {
       console.error("Error unregistering service worker:", error);
     });
 }
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
