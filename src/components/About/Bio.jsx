@@ -38,10 +38,17 @@ function Bio() {
           </div>
           <motion.div className="hidden xl:flex w-1/2 items-center justify-center">
             <motion.img
-              className="w-40 h-40"
+              className="w-40 h-40 hover:cursor-pointer"
               src={redWalking}
               whileHover={{ scale: 1.2 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              drag
+              dragConstraints={{
+                top: -50,
+                left: -50,
+                right: 50,
+                bottom: 50,
+              }}
             />
           </motion.div>
         </div>
