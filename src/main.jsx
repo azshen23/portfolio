@@ -32,16 +32,12 @@ const router = createBrowserRouter([
     element: <Services />,
   },
 ]);
-// Check if the browser supports service workers
 if ("serviceWorker" in navigator) {
-  // Unregister the old service worker
-  navigator.serviceWorker.ready
-    .then((registration) => {
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    for (const registration of registrations) {
       registration.unregister();
-    })
-    .catch((error) => {
-      console.error("Error unregistering service worker:", error);
-    });
+    }
+  });
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
