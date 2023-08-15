@@ -29,19 +29,19 @@ function CardFront({ toggleCard, isFlipped }) {
       transition={{ duration: 0.3 }}
       animate={{ rotateY: isFlipped ? 0 : 180 }}
     >
-      <div className="flex flex-row items-center pt-5">
-        <div className="w-3 lg:w-7 xl:w-10 pb-2">
-          <img src={pokeball} object-fit="contain"></img>
+      <div className="flex flex-row items-center justify-center md:justify-start text-center md:pt-5 w-full md:w-auto">
+        <div className="w-5 lg:w-7 xl:w-10 md:pb-2">
+          <img src={pokeball} alt="Pokeball" className="w-full h-auto"></img>
         </div>
         <h1 className="text-base md:text-xl lg:text-2xl xl:text-4xl font-bold text-white pl-1 pr-1 pt-2">
           TRAINER CARD
         </h1>
-        <div className="w-3 lg:w-7 xl:w-10 pb-2">
-          <img src={pokeball} object-fit="contain"></img>
+        <div className="w-5 lg:w-7 xl:w-10 md:pb-2">
+          <img src={pokeball} alt="Pokeball" className="w-full h-auto"></img>
         </div>
       </div>
       <div className="flex flex-col md:flex-row">
-        <div className="flex flex-col md:w-3/5">
+        <div className="flex flex-col md:w-3/5 text-center md:text-start">
           <div className="flex w-full flex-col lg:flex-row border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
             <h1>PHONENo.</h1>
             <h1 className="font-light">248-250-3985</h1>
