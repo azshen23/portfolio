@@ -89,7 +89,7 @@ export default function Home() {
         {isZoomed && (
           <motion.div
             className="box pokemonFont absolute bottom-10 left-0 right-0 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl m-auto
-            rounded-md pt-6 lg:pt-8 pr-8 pl-2 sm:pl-0 md:pl-8 sm:w-full md:w-3/5 sm:h-60 md:h-56 bg-white 
+            rounded-md pt-6 lg:pt-8 pb-6 lg:pb-10 pr-2 lg:pr-8 pl-2 lg:pl-8 sm:w-full md:w-3/5 bg-white 
             xl:leading-8 2xl:leading-10 border-8 border-white select-none"
             onClick={skip}
             initial={{ x: 300, opacity: 0 }}
