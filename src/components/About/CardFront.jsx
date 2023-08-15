@@ -83,7 +83,7 @@ function CardFront({ toggleCard, isFlipped }) {
         </div>
       </div>
       <div className="pt-12"></div>
-      <div className="">
+      <div className="text-center md:text-start">
         <div className="flex w-full flex-col lg:flex-row border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
           <h1>TIME</h1>
           <h1>{formattedTime}</h1>
