@@ -33,16 +33,16 @@ function CardBack({ isFlipped }) {
       initial={{ rotateY: 180 }}
       animate={{ rotateY: isFlipped ? 180 : 0 }}
       transition={{ duration: 0.3 }}
-      className="back w-full h-full items-center flex flex-col pt-8 pl-10 pr-10"
+      className="back w-full h-full items-center flex flex-col pt-8 pl-10 pr-10 pb-8 lg:pb-0"
     >
-      <div className="flex flex-col font-bold w-full">
-        <h1 className="flex flex-col w-full text-center text-2xl pb-5">
+      <div className="flex flex-col font-bold w-full items-center">
+        <h1 className="flex flex-col w-full text-center md:text-2xl pb-5">
           TECH STACK
         </h1>
-        <div class="grid grid-cols-4 gap-12 w-full  ">
+        <div class="grid grid-cols-4 gap-12 w-full justify-items-center">
           {logos.map((link, index) => (
             <motion.div
-              class="w-24"
+              class="w-12 md:w-16 lg:w-24"
               key={index}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
