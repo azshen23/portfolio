@@ -139,7 +139,7 @@ export default function Home() {
         {dialogueFin && isZoomed && (
           <motion.div
             className="box pokemonFont absolute bottom-72 md:right-40 lg:right-64 xl:right-96 lg:text-lg xl:text-xl m-auto 
-            rounded-md md:pt-6 lg:pt-7 pr-8 pl-8 lg:w-1/4 xl:w-1/5 2xl:w-1/6 h-1/4 bg-white xl:leading-8 2xl:leading-10
+            rounded-md pr-8 pl-8 pt-4 pb-4 lg:w-1/4 xl:w-1/5 2xl:w-1/6 bg-white xl:leading-8 2xl:leading-10
             border-8 border-white select-none"
             initial={{ x: 300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -152,7 +152,7 @@ export default function Home() {
               <Link to={`projects`}>Projects</Link>
             </h1>
             <h1 className="hover:underline">
-              <Link to={`contact`}>Contact Me</Link>
+              <Link to={`contact`}>Contact</Link>
             </h1>
             <h1 className="hover:underline">
               <Link to={`services`}>Services</Link>
