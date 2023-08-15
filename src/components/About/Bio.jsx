@@ -25,13 +25,13 @@ function Bio() {
     <div className="flex flex-col items-center select-none">
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center xl:flex-row xl:pl-64 xl:pr-64">
-          <div className="box bg-white p-5 border-4 text-center w-4/5 lg:w-3/4 xl:w-1/2">
+          <div className="box bg-white p-5 border-4 text-sm md:text-base text-center w-4/5 lg:w-3/4 xl:w-1/2">
             <h1>Hi, nice to meet you, I'm Andrew!</h1>
             <h1 className="pt-10">
               I'm a 22 year old Full Stack Software Engineer and Consultant
               based in Michigan.
             </h1>
-            <h1 className="pb-10 pt-10">
+            <h1 className="pb-2 md:pb-10 pt-10">
               I have a passion for creating products that will help people. So,
               if you are interested, feel free to reach out!
             </h1>
@@ -76,7 +76,8 @@ function Bio() {
                 />
 
                 <motion.div
-                  className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow"
+                  className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow 
+                  text-sm md:text-base lg:text-lg"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "`spring", stiffness: 400, damping: 10 }}
                 >
