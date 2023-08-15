@@ -53,8 +53,8 @@ function Bio() {
           </motion.div>
         </div>
 
-        <div className="flex flex-col w-1/2 text-center pt-20 pb-40">
-          <h1 className="text-2xl text-white pb-10 pokemonFont">
+        <div className="flex flex-col w-full lg:w-1/2 text-center pt-20 pb-40 pl-10 pr-10 lg:pl-0 lg:pr-0">
+          <h1 className="text-2xl text-white pb-10 pokemonFont text-center">
             Relevant Experience History
           </h1>
           {/* Timeline */}

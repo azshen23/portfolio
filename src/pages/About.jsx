@@ -20,7 +20,8 @@ function About() {
       <div className="flex flex-col w-full items-center">
         <motion.div
           onClick={toggleCard}
-          className="border-4 border-black rounded-xl w-4/6 h-[600px] flex flex-col bg-box14 bg-cover pl-2 pt-1 pr-2 hover:cursor-pointer pokemonFont"
+          className="border-4 border-black rounded-xl w-4/6 lg:h-[600px] flex flex-col bg-box14 bg-cover pl-2 pt-1 pr-2 
+          hover:cursor-pointer pokemonFont text-sm lg:text-lg xl:text-2xl"
           transition={{ duration: 0.3 }}
           whileHover={{ scale: 1.05 }}
           animate={{ rotateY: isFlipped ? 0 : 180 }}
@@ -53,7 +54,7 @@ function About() {
         >
           Click!
         </motion.h1>
-        <div className="pt-40"></div>
+        <div className="pt-20 lg:pt-40"></div>
         <Bio />
       </div>
     </div>
