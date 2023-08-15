@@ -37,5 +37,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
-const registration = navigator.serviceWorker.getRegistration();
-registration.unregister();
+// Check if the browser supports service workers
+if ("serviceWorker" in navigator) {
+  // Unregister the old service worker
+  navigator.serviceWorker.ready
+    .then((registration) => {
+      registration.unregister();
+    })
+    .catch((error) => {
+      console.error("Error unregistering service worker:", error);
+    });
+}
