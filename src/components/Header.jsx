@@ -42,7 +42,7 @@ function Header() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              className="flex flex-col box border-4 bg-white absolute top-20 right-2 items-center w-1/2 pt-4 pb-4 space-y-2"
+              className="flex flex-col box border-4 bg-white absolute top-20 right-2 items-center w-1/2 pt-4 pb-4 space-y-2 z-50"
               initial={{ x: 300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -300, opacity: 0 }}

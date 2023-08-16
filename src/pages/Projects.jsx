@@ -1,7 +1,14 @@
 import React from "react";
 import Header from "../components/Header";
 
-const projects = [{ title: "nuocal", link: "nuocal.com" }];
+const projects = [
+  { title: "nuocal", link: "nuocal.com" },
+  {
+    title: "Nutrition Education Initiative",
+    link: "https://joyful-malasada-ab27ce.netlify.app/",
+  },
+  {},
+];
 
 function Projects() {
   return (
