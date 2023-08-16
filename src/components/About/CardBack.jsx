@@ -39,10 +39,10 @@ function CardBack({ isFlipped }) {
         <h1 className="flex flex-col w-full text-center md:text-2xl pb-5">
           TECH STACK
         </h1>
-        <div class="grid grid-cols-4 gap-12 w-full justify-items-center">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 w-full justify-items-center">
           {logos.map((link, index) => (
             <motion.div
-              class="w-12 md:w-16 lg:w-24"
+              class="w-16 lg:w-24"
               key={index}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
