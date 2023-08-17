@@ -19,7 +19,7 @@ const projects = [
   },
   {
     title: "Nutrition Education Initiative",
-    link: "https://joyful-malasada-ab27ce.netlify.app/",
+    link: "https://nutritioneducationinitiative.com/",
     logoColor: nuocalColor,
   },
   {
