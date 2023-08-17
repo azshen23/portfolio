@@ -10,8 +10,39 @@ function Header() {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
   return (
-    <div>
-      <div className="md:hidden">
+    <div className="flex flex-col items-center w-full">
+      <div
+        className="box w-full w-[95%] mt-5 bg-white hidden md:flex flex-row  pt-8 pb-8
+      items-center justify-between pl-2 pr-2 lg:pl-10 lg:pr-10 xl:pl-20 xl:pr-20 pokemonFont border-4 border-white"
+      >
+        <div className="w-24 xl:w-36">
+          <Link to="/">
+            <motion.img
+              whileHover={{ scale: 1.2 }}
+              transition={{ type: "intertia", stiffness: 400, damping: 10 }}
+              src={logo}
+            />
+          </Link>
+        </div>
+        <div className="flex flex-row justify-between space-x-5 lg:space-x-10 lg:text-base xl:text-lg font-bold">
+          <Link to="/" className="hover:underline">
+            Home
+          </Link>
+          <Link to="/about" className="hover:underline  ">
+            About
+          </Link>
+          <Link to="/projects" className="hover:underline ">
+            Projects
+          </Link>
+          <Link to="/services" className="hover:underline ">
+            Services
+          </Link>
+          <Link to="/contact" className="hover:underline ">
+            Contact
+          </Link>
+        </div>
+      </div>
+      <div className="md:hidden w-full">
         <div className="flex flex-col box bg-white items-center p-5 pokemonFont border-4 border-white w-full">
           <div className="w-full flex flex-row justify-between ">
             <div className="w-36">
@@ -65,31 +96,6 @@ function Header() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-
-      <div className="box bg-white w-full h-20 hidden md:flex flex-row items-center justify-between pl-2 pr-2 lg:pl-10 lg:pr-10 xl:pl-20 xl:pr-20 pokemonFont border-4 border-white">
-        <div className="w-24 xl:w-36">
-          <Link to="/">
-            <img src={logo} />
-          </Link>
-        </div>
-        <div className="flex flex-row justify-between space-x-5 lg:space-x-10 lg:text-base xl:text-lg font-bold">
-          <Link to="/" className="hover:underline">
-            Home
-          </Link>
-          <Link to="/about" className="hover:underline  ">
-            About
-          </Link>
-          <Link to="/projects" className="hover:underline ">
-            Projects
-          </Link>
-          <Link to="/services" className="hover:underline ">
-            Services
-          </Link>
-          <Link to="/contact" className="hover:underline ">
-            Contact
-          </Link>
-        </div>
       </div>
     </div>
   );
