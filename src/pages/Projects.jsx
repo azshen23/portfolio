@@ -10,14 +10,14 @@ const allProjects = [
     link: "https://nuocal.com",
     logoColor: nuocalColor,
     logoBW: nuocalBW,
-    tags: ["React Native", "PostgreSQL", "NodeJS / Express"],
+    tags: ["React-Native", "PostgreSQL", "NodeJS / Express"],
   },
   {
     title: "Raining Consulting",
     link: "https://raining.dev",
     logoColor: nuocalColor,
     logoBW: rainingBW,
-    tags: ["React", "PostgreSQL", "NodeJS / Express"],
+    tags: ["React", "PostgreSQL", "NodeJS/Express"],
   },
   {
     title: "Nutrition Education Initiative",
@@ -35,11 +35,11 @@ const allProjects = [
 
 const allTechnologies = [
   "React",
-  "React Native",
+  "React-Native",
   "Firebase",
   "Svelte",
   "PostgreSQL",
-  "NodeJS / Express",
+  "NodeJS/Express",
   "Android",
 ].sort();
 
