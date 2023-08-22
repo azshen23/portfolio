@@ -146,9 +146,6 @@ export default function Home() {
             <h1 className="hover:underline">
               <Link to={`contact`}>Contact</Link>
             </h1>
-            <h1 className="hover:underline">
-              <Link to={`services`}>Services</Link>
-            </h1>
           </motion.div>
         )}
       </AnimatePresence>

@@ -34,9 +34,7 @@ function Header() {
           <Link to="/projects" className="hover:underline ">
             Projects
           </Link>
-          <Link to="/services" className="hover:underline ">
-            Services
-          </Link>
+
           <Link to="/contact" className="hover:underline ">
             Contact
           </Link>
@@ -86,9 +84,6 @@ function Header() {
               </Link>
               <Link to="/projects" className="hover:underline ">
                 Projects
-              </Link>
-              <Link to="/services" className="hover:underline ">
-                Services
               </Link>
               <Link to="/contact" className="hover:underline">
                 Contact
