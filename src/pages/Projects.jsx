@@ -13,7 +13,7 @@ import connectColor from "/src/assets/images/projects/color/connect-color.jpg";
 const allProjects = [
   {
     title: "nuocal",
-    link: "https://nuocal.com",
+    link: "https://github.com/azshen23/nuocal-app",
     logoColor: nuocalColor,
     logoBW: nuocalBW,
     description:
