@@ -86,7 +86,7 @@ function Projects() {
     <div className="flex flex-col w-full items-center justify-center">
       <Header />
       <div className="pt-10 lg:pt-20"></div>
-      <div className="flex flex-col lg:flex-row space-y-2 space-x-3 lg:space-x-5 pokemonFont text-sm lg:text-base ">
+      <div className="flex flex-col lg:flex-row lg:space-y-0 space-y-2 space-x-3 lg:space-x-5 pokemonFont text-sm lg:text-base ">
         {allTechnologies.map((technology, key) => (
           <button
             onClick={() => filterProjects(technology)}
