@@ -82,6 +82,15 @@ function Projects() {
     setIsHovered(updatedList);
   };
 
+  const projectVariant = {
+    hover: {
+      y: 0,
+    },
+    initial: {
+      y: -1000,
+    },
+  };
+
   return (
     <div className="flex flex-col w-full items-center justify-center">
       <Header />
@@ -106,38 +115,34 @@ function Projects() {
         <AnimatePresence>
           {projects.map((project, key) => (
             <motion.div
-              className="flex flex-col lg:w-[400px] lg:h-[400px] lg:w-[475px] lg:h-[475px] box border-8 items-center text-center p-1"
+              className="relative flex flex-col lg:w-[475px] lg:h-[475px] box border-8 items-center justify-center text-center p-1 overflow-hidden"
               key={key}
-              initial={{ opacity: 0 }}
+              initial="initial"
+              whileHover="hover"
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               layout
             >
-              {isHoveredList[key] ? (
-                <motion.div
-                  className="w-full h-full flex flex-col items-center p-10 bg-gradient-to-r from-slate-200 to-orange-50"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onMouseLeave={() => hoverProject(key)}
+              <motion.div
+                className="absolute w-[95%] h-[95%] flex flex-col items-center p-10 bg-gradient-to-r from-slate-200 to-orange-50"
+                variants={projectVariant}
+                transition={{ type: "spring", duration: 0.3 }}
+              >
+                <a
+                  className="w-full h-full flex flex-col items-center text-sm"
+                  href={project.link}
+                  target="_blank"
                 >
-                  <a
-                    className="w-full h-full flex flex-col items-center text-sm"
-                    href={project.link}
-                    target="_blank"
-                  >
-                    <img className="w-1/2 pb-10" src={project.logoColor} />
-                    <h1>{project.description}</h1>
-                  </a>
-                </motion.div>
-              ) : (
-                <div
-                  onMouseEnter={() => hoverProject(key)}
-                  className="w-full flex flex-col items-center p-5"
-                >
-                  <img className="" src={project.logoBW} />
-                </div>
-              )}
+                  <img className="w-1/2 pb-10" src={project.logoColor} />
+                  <h1>{project.description}</h1>
+                </a>
+              </motion.div>
+              <div
+                onMouseEnter={() => hoverProject(key)}
+                className="w-full flex flex-col items-center p-5"
+              >
+                <img className="" src={project.logoBW} />
+              </div>
             </motion.div>
           ))}
         </AnimatePresence>
