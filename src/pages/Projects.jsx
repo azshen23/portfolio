@@ -9,6 +9,7 @@ import connectBW from "/src/assets/images/projects/bw/connect-bw.png";
 import rainingColor from "/src/assets/images/projects/color/raining-color.svg";
 import neiColor from "/src/assets/images/projects/color/nei-color.svg";
 import connectColor from "/src/assets/images/projects/color/connect-color.jpg";
+import ScreenWrapper from "../components/ScreenWrapper";
 
 const allProjects = [
   {
@@ -92,62 +93,64 @@ function Projects() {
   };
 
   return (
-    <div className="flex flex-col w-full items-center justify-center">
-      <Header />
-      <div className="pt-10 lg:pt-20"></div>
-      <div className="flex flex-col lg:flex-row lg:space-y-0 space-y-2 space-x-3 lg:space-x-5 pokemonFont text-sm lg:text-base ">
-        {allTechnologies.map((technology, key) => (
-          <button
-            onClick={() => filterProjects(technology)}
-            key={key}
-            className={`text-black ${
-              technology === curSelectedTech
-                ? "text-opacity-100"
-                : "text-opacity-20 hover:text-opacity-100"
-            }`}
-          >
-            {technology}
-          </button>
-        ))}
-      </div>
-      <div className="pt-10 lg:pt-20"></div>
-      <div className="w-full flex flex-col items-center gap-y-10">
-        <AnimatePresence>
-          {projects.map((project, key) => (
-            <motion.div
-              className="relative flex flex-col lg:w-[475px] lg:h-[475px] box border-8 items-center justify-center text-center p-1 overflow-hidden"
+    <ScreenWrapper>
+      <div className="flex flex-col w-full items-center justify-center">
+        <Header />
+        <div className="pt-10 lg:pt-20"></div>
+        <div className="flex flex-col lg:flex-row lg:space-y-0 space-y-2 space-x-3 lg:space-x-5 pokemonFont text-sm lg:text-base ">
+          {allTechnologies.map((technology, key) => (
+            <button
+              onClick={() => filterProjects(technology)}
               key={key}
-              initial="initial"
-              whileHover="hover"
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              layout
+              className={`text-black ${
+                technology === curSelectedTech
+                  ? "text-opacity-100"
+                  : "text-opacity-20 hover:text-opacity-100"
+              }`}
             >
-              <motion.div
-                className="absolute w-[95%] h-[95%] flex flex-col items-center p-10 bg-gradient-to-r from-slate-200 to-orange-50"
-                variants={projectVariant}
-                transition={{ type: "spring", duration: 0.3 }}
-              >
-                <a
-                  className="w-full h-full flex flex-col items-center text-sm"
-                  href={project.link}
-                  target="_blank"
-                >
-                  <img className="w-1/2 pb-10" src={project.logoColor} />
-                  <h1>{project.description}</h1>
-                </a>
-              </motion.div>
-              <div
-                onMouseEnter={() => hoverProject(key)}
-                className="w-full flex flex-col items-center p-5"
-              >
-                <img className="" src={project.logoBW} />
-              </div>
-            </motion.div>
+              {technology}
+            </button>
           ))}
-        </AnimatePresence>
+        </div>
+        <div className="pt-10 lg:pt-20"></div>
+        <div className="w-full flex flex-col items-center gap-y-10">
+          <AnimatePresence>
+            {projects.map((project, key) => (
+              <motion.div
+                className="relative flex flex-col lg:w-[475px] lg:h-[475px] box border-8 items-center justify-center text-center p-1 overflow-hidden"
+                key={key}
+                initial="initial"
+                whileHover="hover"
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                layout
+              >
+                <motion.div
+                  className="absolute w-[95%] h-[95%] flex flex-col items-center p-10 bg-gradient-to-r from-slate-200 to-orange-50"
+                  variants={projectVariant}
+                  transition={{ type: "spring", duration: 0.3 }}
+                >
+                  <a
+                    className="w-full h-full flex flex-col items-center text-sm"
+                    href={project.link}
+                    target="_blank"
+                  >
+                    <img className="w-1/2 pb-10" src={project.logoColor} />
+                    <h1>{project.description}</h1>
+                  </a>
+                </motion.div>
+                <div
+                  onMouseEnter={() => hoverProject(key)}
+                  className="w-full flex flex-col items-center p-5"
+                >
+                  <img className="" src={project.logoBW} />
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </ScreenWrapper>
   );
 }
 

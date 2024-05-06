@@ -4,13 +4,23 @@ import redWalking from "/src/assets/images/About/redWalking.gif";
 
 const history = [
   {
+    Name: "The University of Michigan",
+    Date: "5/2024 - Present",
+    Title: "Masters of Applied Data Science",
+  },
+  {
+    Name: "General Motors",
+    Date: "1/2024 - Present",
+    Title: "Software Engineer",
+  },
+  {
     Name: "Freelance",
     Date: "12/2022 - Present",
     Title: "Software Consulting",
   },
   {
     Name: "The University of Michigan",
-    Date: "12/2022",
+    Date: "9/2019 - 12/2022",
     Title: "B.S. in Engineering in Computer Science",
   },
   {
@@ -60,7 +70,7 @@ function Bio() {
           {/* Timeline */}
           <div
             className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px
-           md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b 
+           md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b
            before:from-transparent before:via-slate-300 before:to-transparent text-xl"
           >
             {history.map((item, index) => (
@@ -70,13 +80,13 @@ function Bio() {
               >
                 {/*Icon*/}
                 <img
-                  className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 text-slate-500 shadow 
+                  className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 text-slate-500 shadow
               shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2"
                   src={pokeball}
                 />
 
                 <motion.div
-                  className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow 
+                  className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow
                   text-sm md:text-base lg:text-lg"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "`spring", stiffness: 400, damping: 10 }}
