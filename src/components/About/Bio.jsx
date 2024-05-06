@@ -93,7 +93,7 @@ function Bio() {
                 >
                   <div className="flex items-center justify-between space-x-2 mb-1">
                     <div className="font-bold text-slate-900">{item.Name}</div>
-                    <div className="font-medium text-indigo-500 font-bold">
+                    <div className="font-medium text-indigo-500">
                       {item.Date}
                     </div>
                   </div>
