@@ -4,11 +4,11 @@ import Header from "../components/Header";
 import nuocalBW from "/src/assets/images/projects/bw/nuocal-bw.png";
 import nuocalColor from "/src/assets/images/projects/color/nuocal-color.png";
 import rainingBW from "/src/assets/images/projects/bw/raining-bw.png";
-import neiBW from "/src/assets/images/projects/bw/nei-bw.png";
 import connectBW from "/src/assets/images/projects/bw/connect-bw.png";
 import rainingColor from "/src/assets/images/projects/color/raining-color.svg";
-import neiColor from "/src/assets/images/projects/color/nei-color.svg";
 import connectColor from "/src/assets/images/projects/color/connect-color.jpg";
+import spotifytkColor from "/src/assets/images/projects/color/spotifytk-color.png";
+import spotifytkBW from "/src/assets/images/projects/bw/spotifytk-bw.png";
 import ScreenWrapper from "../components/ScreenWrapper";
 
 const allProjects = [
@@ -22,22 +22,13 @@ const allProjects = [
     tags: ["All", "React-Native", "PostgreSQL", "NodeJS / Express"],
   },
   {
-    title: "Raining Consulting",
-    link: "https://raining.dev",
-    logoColor: rainingColor,
-    logoBW: rainingBW,
+    title: "Spotify Tool Kit",
+    link: "https://github.com/azshen23/spotify-tk",
+    logoColor: spotifytkColor,
+    logoBW: spotifytkBW,
     description:
-      "Raining.dev is a full-stack web application where I run my personal software consulting business",
-    tags: ["All", "React", "PostgreSQL", "NodeJS/Express"],
-  },
-  {
-    title: "Nutrition Education Initiative",
-    link: "https://nutritioneducationinitiative.com/",
-    logoColor: neiColor,
-    logoBW: neiBW,
-    description:
-      "NEI is a front-end web application for the non-profit organization Nutrition Education Initiative",
-    tags: ["All", "Svelte"],
+      "Spotify Tool Kit is a Frontend toolkit for Spotify's API utilizing their Oauth2",
+    tags: ["All", "React-Native", "PostgreSQL", "NodeJS/Express"],
   },
   {
     title: "Connect",
@@ -48,6 +39,15 @@ const allProjects = [
       "Connect is a full-stack Android application aimed to allow nearby users to connect and create relationships",
     tags: ["All", "Android", "Firebase"],
   },
+  {
+    title: "Raining Consulting",
+    link: "https://raining.dev",
+    logoColor: rainingColor,
+    logoBW: rainingBW,
+    description:
+      "Raining.dev is a full-stack web application where I run my personal software consulting business",
+    tags: ["All", "React", "PostgreSQL", "NodeJS/Express"],
+  },
 ];
 
 const allTechnologies = [
@@ -55,7 +55,6 @@ const allTechnologies = [
   "React",
   "React-Native",
   "Firebase",
-  "Svelte",
   "PostgreSQL",
   "NodeJS/Express",
   "Android",
@@ -65,14 +64,14 @@ function Projects() {
   const [projects, setProjects] = useState(allProjects);
   const [curSelectedTech, setCurSelectedTech] = useState("All");
   const [isHoveredList, setIsHovered] = useState(
-    Array(allProjects.length).fill(false)
+    Array(allProjects.length).fill(false),
   );
 
   const filterProjects = (technology) => {
     setProjects(
       allProjects.filter((project) =>
-        project.tags.some((tag) => tag === technology)
-      )
+        project.tags.some((tag) => tag === technology),
+      ),
     );
     setCurSelectedTech(technology);
   };
