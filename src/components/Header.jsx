@@ -12,7 +12,7 @@ function Header() {
   return (
     <div className="flex flex-col items-center w-full">
       <div
-        className="box w-full w-[95%] mt-5 bg-white hidden md:flex flex-row  pt-8 pb-8
+        className="box w-full mt-5 bg-white hidden md:flex flex-row  pt-8 pb-8
       items-center justify-between pl-2 pr-2 lg:pl-10 lg:pr-10 xl:pl-20 xl:pr-20 pokemonFont border-4 border-white"
       >
         <div className="w-24 xl:w-36">
