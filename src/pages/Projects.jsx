@@ -19,7 +19,7 @@ const allProjects = [
     logoBW: nuocalBW,
     description:
       "Nuocal is a full-stack cross platform mobile application that allows users to write down their daily thoughts to share and vent with others",
-    tags: ["All", "React-Native", "PostgreSQL", "NodeJS / Express"],
+    tags: ["All", "React-Native", "PostgreSQL", "NodeJS/Express"],
   },
   {
     title: "Spotify Tool Kit",
@@ -63,9 +63,6 @@ const allTechnologies = [
 function Projects() {
   const [projects, setProjects] = useState(allProjects);
   const [curSelectedTech, setCurSelectedTech] = useState("All");
-  const [isHoveredList, setIsHovered] = useState(
-    Array(allProjects.length).fill(false),
-  );
 
   const filterProjects = (technology) => {
     setProjects(
@@ -74,12 +71,6 @@ function Projects() {
       ),
     );
     setCurSelectedTech(technology);
-  };
-
-  const hoverProject = (index) => {
-    const updatedList = [...isHoveredList];
-    updatedList[index] = !updatedList[index];
-    setIsHovered(updatedList);
   };
 
   const projectVariant = {
@@ -93,18 +84,18 @@ function Projects() {
 
   return (
     <ScreenWrapper>
-      <div className="flex flex-col w-full items-center justify-center">
+      <div className="flex flex-col w-full items-center justify-center pb-20">
         <Header />
         <div className="pt-10 lg:pt-20"></div>
-        <div className="flex flex-col lg:flex-row lg:space-y-0 space-y-2 space-x-3 lg:space-x-5 pokemonFont text-sm lg:text-base ">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-4 pokemonFont text-xs md:text-sm lg:text-base px-4">
           {allTechnologies.map((technology, key) => (
             <button
               onClick={() => filterProjects(technology)}
               key={key}
-              className={`text-black ${
+              className={`text-black px-4 py-2 rounded-xl transition-all duration-200 border-2 ${
                 technology === curSelectedTech
-                  ? "text-opacity-100"
-                  : "text-opacity-20 hover:text-opacity-100"
+                  ? "text-opacity-100 bg-white border-black shadow-md font-bold"
+                  : "text-opacity-50 hover:text-opacity-100 hover:bg-white/50 border-transparent"
               }`}
             >
               {technology}
@@ -112,12 +103,12 @@ function Projects() {
           ))}
         </div>
         <div className="pt-10 lg:pt-20"></div>
-        <div className="w-full flex flex-col items-center gap-y-10">
+        <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-5 justify-items-center">
           <AnimatePresence>
-            {projects.map((project, key) => (
+            {projects.map((project) => (
               <motion.div
-                className="relative flex flex-col lg:w-[475px] lg:h-[475px] box border-8 items-center justify-center text-center p-1 overflow-hidden"
-                key={key}
+                className="relative flex flex-col w-full max-w-[475px] h-[400px] lg:h-[475px] box border-8 items-center justify-center text-center p-1 overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-white"
+                key={project.title}
                 initial="initial"
                 whileHover="hover"
                 animate={{ opacity: 1 }}
@@ -125,24 +116,22 @@ function Projects() {
                 layout
               >
                 <motion.div
-                  className="absolute w-[95%] h-[95%] flex flex-col items-center p-10 bg-gradient-to-r from-slate-200 to-orange-50"
+                  className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 bg-gradient-to-r from-slate-200 to-orange-50 z-10"
                   variants={projectVariant}
                   transition={{ type: "spring", duration: 0.3 }}
                 >
                   <a
-                    className="w-full h-full flex flex-col items-center text-sm"
+                    className="w-full h-full flex flex-col items-center justify-center text-sm md:text-base"
                     href={project.link}
                     target="_blank"
+                    rel="noreferrer"
                   >
-                    <img className="w-1/2 pb-10" src={project.logoColor} />
-                    <h1>{project.description}</h1>
+                    <img className="w-1/2 max-h-40 object-contain pb-6" src={project.logoColor} alt={project.title} />
+                    <h1 className="font-medium px-4">{project.description}</h1>
                   </a>
                 </motion.div>
-                <div
-                  onMouseEnter={() => hoverProject(key)}
-                  className="w-full flex flex-col items-center p-5"
-                >
-                  <img className="" src={project.logoBW} />
+                <div className="w-full h-full flex flex-col items-center justify-center p-5">
+                  <img className="max-h-60 object-contain" src={project.logoBW} alt={project.title} />
                 </div>
               </motion.div>
             ))}

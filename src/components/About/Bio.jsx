@@ -31,19 +31,20 @@ const history = [
 ];
 
 function Bio() {
+  const age = new Date().getFullYear() - 2001;
   return (
     <div className="flex flex-col items-center select-none">
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center xl:flex-row xl:pl-64 xl:pr-64">
-          <div className="box bg-white p-5 border-4 text-sm md:text-base text-center w-4/5 lg:w-3/4 xl:w-1/2">
-            <h1>Hi, nice to meet you, I'm Andrew!</h1>
+          <div className="box bg-white p-5 border-4 text-sm md:text-base text-center w-4/5 lg:w-3/4 xl:w-1/2 shadow-lg">
+            <h1>Hi, nice to meet you, I'm Andrew.</h1>
             <h1 className="pt-10">
-              I'm a 22 year old Full Stack Software Engineer and Consultant
+              I'm a {age} year old Full Stack Software Engineer and Consultant
               based in Michigan.
             </h1>
             <h1 className="pb-2 md:pb-10 pt-10">
               I have a passion for creating products that will help people. So,
-              if you are interested, feel free to reach out!
+              if you are interested, feel free to reach out.
             </h1>
           </div>
           <motion.div className="hidden xl:flex w-1/2 items-center justify-center">
@@ -64,7 +65,7 @@ function Bio() {
         </div>
 
         <div className="flex flex-col w-full lg:w-1/2 text-center pt-20 pb-40 pl-10 pr-10 lg:pl-0 lg:pr-0">
-          <h1 className="text-2xl text-white pb-10 pokemonFont text-center">
+          <h1 className="text-2xl text-white pb-10 pokemonFont text-center shadow-sm">
             Relevant Experience History
           </h1>
           {/* Timeline */}
@@ -86,10 +87,10 @@ function Bio() {
                 />
 
                 <motion.div
-                  className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow
-                  text-sm md:text-base lg:text-lg"
+                  className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] box bg-white p-4 rounded border-4 border-black shadow-lg
+                  text-sm md:text-base lg:text-lg text-left"
                   whileHover={{ scale: 1.05 }}
-                  transition={{ type: "`spring", stiffness: 400, damping: 10 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   <div className="flex items-center justify-between space-x-2 mb-1">
                     <div className="font-bold text-slate-900">{item.Name}</div>

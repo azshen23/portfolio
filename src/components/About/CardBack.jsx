@@ -33,21 +33,21 @@ function CardBack({ isFlipped }) {
       initial={{ rotateY: 180 }}
       animate={{ rotateY: isFlipped ? 180 : 0 }}
       transition={{ duration: 0.3 }}
-      className="back w-full h-full items-center flex flex-col pt-8 pl-10 pr-10 pb-8 lg:pb-0"
+      className="back w-full h-full items-center flex flex-col pt-8 px-12 md:px-16 pb-12 overflow-y-auto"
     >
-      <div className="flex flex-col font-bold w-full items-center">
-        <h1 className="flex flex-col w-full text-center md:text-2xl pb-5">
+      <div className="flex flex-col font-bold w-full items-center max-w-full">
+        <h1 className="flex flex-col w-full text-center md:text-2xl pb-5 shadow-sm">
           TECH STACK
         </h1>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 w-full justify-items-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 w-full justify-items-center items-center">
           {logos.map((link, index) => (
             <motion.div
-              className="w-16 lg:w-24"
+              className="w-14 md:w-20 lg:w-24 flex items-center justify-center p-2 bg-white/60 rounded-xl backdrop-blur-md shadow-sm border border-white/40"
               key={index}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              <img className="w-full h-full svg" src={link} />
+              <img className="w-full h-full object-contain svg" src={link} />
             </motion.div>
           ))}
         </div>

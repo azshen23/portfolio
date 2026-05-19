@@ -78,20 +78,19 @@ function Contact() {
         <Header />
         <div className="pt-20"></div>
         <div className="flex flex-row w-full pokemonFont pb-20">
-          <div className="flex flex-col w-full items-center ">
-            <h1 className="text-2xl pb-10 w-full text-center">
-              {" "}
-              Get In Touch With Me!
+          <div className="flex flex-col w-full items-center px-4">
+            <h1 className="text-2xl pb-10 w-full text-center shadow-sm">
+              Get In Touch With Me.
             </h1>
             <form className="flex flex-col text-start w-full md:w-3/5 lg:w-2/5">
               <label
                 htmlFor="name"
-                className="pt-5 pb-5 font-bold w-full pl-2 md:pl-0"
+                className="pt-5 pb-3 font-bold w-full pl-2 md:pl-0 text-sm md:text-base"
               >
                 Your Name
               </label>
-              <textarea
-                className="border-4 box pt-6 pl-3 pr-2 font-thin w-full"
+              <input
+                className="border-4 box pt-4 pb-4 pl-3 pr-2 font-thin w-full text-base shadow-sm"
                 type="text"
                 id="name"
                 name="user_name"
@@ -101,20 +100,20 @@ function Contact() {
                 onChange={(e) => setName(e.target.value)}
               />
               {!isNameValid && (
-                <p className="text-red-500 pt-2 w-full">*Name is required</p>
+                <p className="text-red-500 pt-2 w-full text-sm">*Name is required</p>
               )}
 
               <label
                 htmlFor="email"
-                className="pt-10 pb-5 font-bold w-full pl-2 md:pl-0"
+                className="pt-8 pb-3 font-bold w-full pl-2 md:pl-0 text-sm md:text-base"
               >
                 Your Email
               </label>
               <input
-                className="box border-4 pt-6 pb-6 font-thin pl-3 w-full"
-                type="text"
+                className="box border-4 pt-4 pb-4 font-thin pl-3 pr-2 w-full text-base shadow-sm"
+                type="email"
                 id="email"
-                name="user_name"
+                name="user_email"
                 autoComplete="email"
                 placeholder="youremail@example.com"
                 value={email}
@@ -122,36 +121,36 @@ function Contact() {
               />
 
               {!isEmailValid && (
-                <p className="text-red-500 pt-2 w-full">*Email is required</p>
+                <p className="text-red-500 pt-2 w-full text-sm">*Email is required</p>
               )}
 
               <label
                 htmlFor="subject"
-                className="pt-10 pb-5 font-bold w-full pl-2 md:pl-0"
+                className="pt-8 pb-3 font-bold w-full pl-2 md:pl-0 text-sm md:text-base"
               >
                 Subject
               </label>
-              <textarea
-                className="box border-4 pt-6 font-thin pl-3 w-full"
+              <input
+                className="box border-4 pt-4 pb-4 font-thin pl-3 pr-2 w-full text-base shadow-sm"
                 type="text"
                 id="subject"
-                name="user_name"
+                name="subject"
                 placeholder="Subject"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
               />
               {!isSubjectValid && (
-                <p className="text-red-500 pt-2 w-full">*Subject is required</p>
+                <p className="text-red-500 pt-2 w-full text-sm">*Subject is required</p>
               )}
 
               <label
                 htmlFor="message"
-                className="pt-10 pb-5 font-bold w-full pl-2 md:pl-0"
+                className="pt-8 pb-3 font-bold w-full pl-2 md:pl-0 text-sm md:text-base"
               >
                 Message
               </label>
               <textarea
-                className="box border-4 pt-4 pb-10 text-small font-thin pl-3 pb-20 w-full"
+                className="box border-4 pt-4 pb-4 pl-3 pr-2 h-40 text-sm md:text-base font-thin w-full resize-y shadow-sm"
                 name="message"
                 id="message"
                 placeholder="Write Your Message Here"
@@ -160,22 +159,22 @@ function Contact() {
               />
 
               {!isMessageValid && (
-                <p className="text-red-500 pt-2 w-full">*Message is required</p>
+                <p className="text-red-500 pt-2 w-full text-sm">*Message is required</p>
               )}
             </form>
             <button
-              className="box border-4 w-1/2 md:w-1/4 cursor-pointer text-black pb-4 pt-4 mt-10 font-bold text-center"
+              className="box border-4 w-full md:w-1/4 cursor-pointer text-black py-4 mt-10 font-bold text-center shadow-md hover:bg-gray-100 transition-colors duration-200"
               onClick={() => handleSubmit()}
             >
               Send Message
             </button>
             {isSubmitted && (
-              <div className="fixed inset-0 flex items-center justify-center z-50">
-                <div className="box bg-white border-4 p-8 shadow-lg">
-                  <h2 className="text-2xl font-bold mb-4">Success!</h2>
-                  <p>Your message has been submitted successfully.</p>
+              <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40 backdrop-blur-sm">
+                <div className="box bg-white border-4 p-8 shadow-2xl max-w-md w-full mx-4">
+                  <h2 className="text-2xl font-bold mb-4 shadow-sm">Success.</h2>
+                  <p className="text-base mb-6 font-medium">Your message has been submitted successfully.</p>
                   <button
-                    className="mt-6 font-bold py-2 px-4 border-black border-2 rounded-lg"
+                    className="font-bold py-2 px-6 border-black border-4 rounded-xl shadow-sm hover:bg-gray-100 transition-colors duration-200"
                     onClick={() => setIsSubmitted(false)}
                   >
                     Close

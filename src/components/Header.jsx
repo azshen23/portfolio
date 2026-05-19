@@ -19,23 +19,23 @@ function Header() {
           <Link to="/">
             <motion.img
               whileHover={{ scale: 1.2 }}
-              transition={{ type: "intertia", stiffness: 400, damping: 10 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
               src={logo}
             />
           </Link>
         </div>
         <div className="flex flex-row justify-between space-x-5 lg:space-x-10 lg:text-base xl:text-lg font-bold">
-          <Link to="/" className="hover:underline">
+          <Link to="/" className="hover:underline hover:text-red-600 transition-colors duration-200">
             Home
           </Link>
-          <Link to="/about" className="hover:underline  ">
+          <Link to="/about" className="hover:underline hover:text-red-600 transition-colors duration-200">
             About
           </Link>
-          <Link to="/projects" className="hover:underline ">
+          <Link to="/projects" className="hover:underline hover:text-red-600 transition-colors duration-200">
             Projects
           </Link>
 
-          <Link to="/contact" className="hover:underline ">
+          <Link to="/contact" className="hover:underline hover:text-red-600 transition-colors duration-200">
             Contact
           </Link>
         </div>

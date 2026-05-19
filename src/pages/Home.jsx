@@ -38,8 +38,8 @@ const child = {
 };
 
 const words =
-  "Hello! My name is Andrew and I am a Full Stack Software Engineer and Consultant. Check out these links to learn more!".split(
-    ""
+  "Hello. My name is Andrew and I am a Full Stack Software Engineer and Consultant. Check out these links to learn more.".split(
+    " "
   );
 
 export default function Home() {
@@ -84,14 +84,20 @@ export default function Home() {
             <motion.div
               className="box pokemonFont absolute bottom-10 left-0 right-0 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl m-auto
             rounded-md pt-6 lg:pt-8 pb-6 lg:pb-8 pr-2 lg:pr-8 pl-2 lg:pl-8 sm:w-full md:w-3/5 bg-white 
-            xl:leading-8 2xl:leading-10 border-8 border-white select-none"
+            xl:leading-8 2xl:leading-10 border-8 border-white select-none shadow-2xl"
               onClick={skip}
               initial={{ x: 300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -300, opacity: 0 }}
             >
               {isSkipped ? (
-                <div>{words}</div>
+                <div>
+                  {words.map((word, index) => (
+                    <span key={index} style={{ marginRight: "0.75rem", display: "inline-block" }}>
+                      {word}
+                    </span>
+                  ))}
+                </div>
               ) : (
                 <motion.div
                   variants={container}
@@ -105,7 +111,7 @@ export default function Home() {
                     <motion.span
                       variants={child}
                       key={index}
-                      style={{ marginRight: "2px" }}
+                      style={{ marginRight: "0.75rem", display: "inline-block" }}
                     >
                       {word}
                     </motion.span>
@@ -131,54 +137,61 @@ export default function Home() {
             <motion.div
               className="box pokemonFont absolute bottom-80 md:right-40 lg:right-64 xl:right-80 lg:text-lg xl:text-xl m-auto 
             rounded-md pr-8 pl-8 pt-4 pb-4 lg:w-1/4 xl:w-1/5 2xl:w-1/6 bg-white xl:leading-8 2xl:leading-10
-            border-8 border-white select-none"
+            border-8 border-white select-none shadow-2xl"
               initial={{ x: 300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -300, opacity: 0 }}
             >
-              <h1 className="hover:underline">
-                <Link to={`about`}>About Me</Link>
+              <h1 className="hover:underline hover:text-red-600 transition-colors duration-200 py-1">
+                <Link to="/about" className="block">About Me</Link>
               </h1>
-              <h1 className="hover:underline">
-                <Link to={`projects`}>Projects</Link>
+              <h1 className="hover:underline hover:text-red-600 transition-colors duration-200 py-1">
+                <Link to="/projects" className="block">Projects</Link>
               </h1>
-              <h1 className="hover:underline">
-                <Link to={`contact`}>Contact</Link>
+              <h1 className="hover:underline hover:text-red-600 transition-colors duration-200 py-1">
+                <Link to="/contact" className="block">Contact</Link>
               </h1>
             </motion.div>
           )}
         </AnimatePresence>
       </ScreenWrapper>
-      {isZoomedOut && (
-        <div className="absolute xs:bottom-10 bottom-32 w-full flex flex-col justify-center items-center">
-          <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
-            <motion.div
+      <AnimatePresence>
+        {isZoomedOut && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute xs:bottom-10 bottom-32 w-full flex flex-col justify-center items-center pointer-events-none"
+          >
+            <div className="w-[35px] h-[64px] rounded-3xl border-4 border-white flex justify-center items-start p-2 shadow-lg bg-black/20 backdrop-blur-sm">
+              <motion.div
+                animate={{
+                  y: [0, 24, 0],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                }}
+                className="w-3 h-3 rounded-full bg-red-500 mb-2"
+              />
+            </div>
+            <motion.h1
+              className="text-red-500 text-lg font-bold mt-1 shadow-sm"
               animate={{
-                y: [0, 24, 0],
+                y: [0, 16, 0],
               }}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
                 repeatType: "loop",
               }}
-              className="w-3 h-3 rounded-full bg-red-500 mb-2"
-            />
-          </div>
-          <motion.h1
-            className="text-red-500 text-lg font-bold mt-1"
-            animate={{
-              y: [0, 16, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              repeatType: "loop",
-            }}
-          >
-            Scroll
-          </motion.h1>
-        </div>
-      )}
+            >
+              Scroll
+            </motion.h1>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
