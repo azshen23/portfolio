@@ -31,78 +31,90 @@ const history = [
 ];
 
 function Bio() {
-  const age = new Date().getFullYear() - 2001;
   return (
-    <div className="flex flex-col items-center select-none">
-      <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center xl:flex-row xl:pl-64 xl:pr-64">
-          <div className="box bg-white p-5 border-4 text-sm md:text-base text-center w-4/5 lg:w-3/4 xl:w-1/2 shadow-lg">
-            <h1>Hi, nice to meet you, I'm Andrew.</h1>
-            <h1 className="pt-10">
-              I'm a {age} year old Full Stack Software Engineer and Consultant
-              based in Michigan.
-            </h1>
-            <h1 className="pb-2 md:pb-10 pt-10">
-              I have a passion for creating products that will help people. So,
-              if you are interested, feel free to reach out.
-            </h1>
+    <div className="flex flex-col items-center w-full gap-16 sm:gap-24">
+      {/* Intro Dialogue + Interactive Sprite */}
+      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div className="md:col-span-8 rpg-dialogue relative p-6 sm:p-8">
+          <div className="absolute -top-3.5 left-6 rounded-md bg-poke-crimson px-3 py-1 border-2 border-slate-900">
+            <span className="pokemonFont text-[10px] sm:text-xs text-white">
+              BIO
+            </span>
           </div>
-          <motion.div className="hidden xl:flex w-1/2 items-center justify-center">
-            <motion.img
-              className="w-40 h-40 hover:cursor-pointer"
-              src={redWalking}
-              whileHover={{ scale: 1.2 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              drag
-              dragConstraints={{
-                top: -50,
-                left: -50,
-                right: 50,
-                bottom: 50,
-              }}
-            />
-          </motion.div>
+          <div className="space-y-4 text-sm sm:text-base leading-relaxed text-slate-800">
+            <p className="pokemonFont text-xs sm:text-sm text-slate-900 leading-relaxed">
+              Hi, nice to meet you, I&apos;m Andrew!
+            </p>
+            <p>
+              I&apos;m a 22 year old Full Stack Software Engineer and Consultant
+              based in Michigan.
+            </p>
+            <p>
+              I have a passion for creating products that will help people. So,
+              if you are interested, feel free to reach out!
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col w-full lg:w-1/2 text-center pt-20 pb-40 pl-10 pr-10 lg:pl-0 lg:pr-0">
-          <h1 className="text-2xl text-white pb-10 pokemonFont text-center shadow-sm">
-            Relevant Experience History
-          </h1>
-          {/* Timeline */}
-          <div
-            className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px
-           md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b
-           before:from-transparent before:via-slate-300 before:to-transparent text-xl"
-          >
-            {history.map((item, index) => (
-              <div
-                className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
-                key={index}
-              >
-                {/*Icon*/}
-                <img
-                  className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 text-slate-500 shadow
-              shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2"
-                  src={pokeball}
-                />
+        <div className="md:col-span-4 flex flex-col items-center justify-center">
+          <motion.img
+            className="w-32 h-32 sm:w-40 sm:h-40 cursor-grab active:cursor-grabbing drop-shadow-[0_12px_20px_rgba(0,0,0,0.45)]"
+            src={redWalking}
+            alt="Red walking sprite"
+            whileHover={{ scale: 1.12 }}
+            transition={{ type: "spring", stiffness: 360, damping: 16 }}
+            drag
+            dragConstraints={{
+              top: -40,
+              left: -40,
+              right: 40,
+              bottom: 40,
+            }}
+          />
+          <span className="mt-2 text-xs text-slate-400">
+            Drag sprite to play
+          </span>
+        </div>
+      </div>
 
-                <motion.div
-                  className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] box bg-white p-4 rounded border-4 border-black shadow-lg
-                  text-sm md:text-base lg:text-lg text-left"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <div className="flex items-center justify-between space-x-2 mb-1">
-                    <div className="font-bold text-slate-900">{item.Name}</div>
-                    <div className="font-medium text-indigo-500">
-                      {item.Date}
-                    </div>
-                  </div>
-                  <div className="text-slate-500">{item.Title}</div>
-                </motion.div>
+      {/* Relevant Experience History */}
+      <div className="w-full max-w-4xl">
+        <h2 className="pokemonFont text-xl sm:text-2xl text-white text-center mb-10 sm:mb-12">
+          Relevant Experience History
+        </h2>
+
+        <div
+          className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px
+           md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b
+           before:from-transparent before:via-slate-500/60 before:to-transparent"
+        >
+          {history.map((item, index) => (
+            <div
+              className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
+              key={`${item.Name}-${index}`}
+            >
+              {/* Pokéball Timeline Node */}
+              <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-slate-900 bg-white shadow-md shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                <img className="w-7 h-7" src={pokeball} alt="" />
               </div>
-            ))}
-          </div>
+
+              <motion.div
+                className="w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] rpg-panel p-5 transition-colors hover:border-poke-sky/45"
+                whileHover={{ y: -3 }}
+                transition={{ type: "spring", stiffness: 360, damping: 20 }}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                  <h3 className="font-bold text-base sm:text-lg text-white">
+                    {item.Name}
+                  </h3>
+                  <span className="rounded-full bg-poke-gold/15 border border-poke-gold/30 px-2.5 py-0.5 text-xs font-semibold text-poke-gold">
+                    {item.Date}
+                  </span>
+                </div>
+                <p className="text-sm text-slate-300">{item.Title}</p>
+              </motion.div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

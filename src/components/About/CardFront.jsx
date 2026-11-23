@@ -1,103 +1,146 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import pokeball from "/src/assets/images/About/cardPokeball.png";
 import pfp from "/src/assets/images/About/pfp.jpg";
 
-function CardFront({ toggleCard, isFlipped }) {
+function CardFront() {
   const [currentTime, setCurrentTime] = useState(new Date());
+
   const stopEvent = (e) => {
-    e.stopPropagation(); // This prevents the div's click event from firing
+    e.stopPropagation();
   };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
-    }, 30000); // Update every minute (60000 milliseconds)
-
-    return () => {
-      clearInterval(intervalId); // Cleanup interval on component unmount
-    };
+    }, 30000);
+    return () => clearInterval(intervalId);
   }, []);
 
   const formattedTime = `${currentTime.getHours()}:${String(
     currentTime.getMinutes()
   ).padStart(2, "0")}`;
+
   return (
-    <motion.div
-      className="front w-full h-full"
-      onClick={toggleCard}
-      transition={{ duration: 0.3 }}
-      animate={{ rotateY: isFlipped ? 0 : 180 }}
-    >
-      <div className="flex flex-row items-center justify-center md:justify-start text-center md:pt-5 w-full md:w-auto">
-        <div className="w-5 lg:w-7 xl:w-10 md:pb-2">
-          <img src={pokeball} alt="Pokeball" className="w-full h-auto"></img>
+    <div className="relative overflow-hidden rounded-2xl border-2 border-slate-900 bg-box14 bg-cover bg-center shadow-rpg-lg">
+      {/* Contrast scrim so Trainer Card fields remain crisp */}
+      <div className="bg-slate-950/65 p-5 sm:p-8">
+        {/* Top Trainer Card Header */}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/20 pb-4 mb-6">
+          <div className="flex items-center gap-2.5">
+            <img src={pokeball} alt="" className="w-6 h-6 sm:w-8 sm:h-8" />
+            <h2 className="pokemonFont text-base sm:text-xl md:text-2xl text-white tracking-wider">
+              TRAINER CARD
+            </h2>
+            <img src={pokeball} alt="" className="w-6 h-6 sm:w-8 sm:h-8" />
+          </div>
+          <span className="rounded-md bg-poke-gold/95 px-2.5 py-1 text-xs font-bold tracking-wider text-slate-950">
+            ID No. 00624
+          </span>
         </div>
-        <h1 className="text-base md:text-xl lg:text-2xl xl:text-4xl font-bold text-white pl-1 pr-1 pt-2">
-          TRAINER CARD
-        </h1>
-        <div className="w-5 lg:w-7 xl:w-10 md:pb-2">
-          <img src={pokeball} alt="Pokeball" className="w-full h-auto"></img>
-        </div>
-      </div>
-      <div className="flex flex-col md:flex-row">
-        <div className="flex flex-col md:w-3/5 text-center md:text-start">
-          <div className="flex w-full flex-col lg:flex-row border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-            <h1>PHONENo.</h1>
-            <h1 className="font-light">248-250-3985</h1>
-          </div>
-          <div className="pt-2"></div>
-          <div className="flex w-full flex-col lg:flex-row border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-            <h1>NAME</h1>
-            <h1 className="font-bold">Andrew Shen</h1>
-          </div>
-          <div className="pt-8"></div>
-          <div className="flex w-full flex-col lg:flex-row border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0 ">
-            <h1>EMAIL</h1>
-            <h1 className="font-bold">azshen@umich.edu</h1>
-          </div>
-          <div className="pt-8"></div>
-          <div className="flex w-full flex-col lg:flex-row border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-            <h1>GITHUB</h1>
-            <h1 className="font-bold hover:underline" onClick={stopEvent}>
-              <a href="https://github.com/azshen23" target="_blank">
-                /azshen23
+
+        {/* Main Card Body */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          {/* Left Stats / Contact Rows */}
+          <div className="md:col-span-7 flex flex-col gap-2.5">
+            <div className="flex items-center justify-between gap-4 rounded-lg bg-white/95 px-4 py-2.5 text-slate-900 shadow-sm">
+              <span className="pokemonFont text-[10px] sm:text-xs text-slate-500">
+                NAME
+              </span>
+              <span className="text-sm sm:text-base font-bold">
+                Andrew Shen
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between gap-4 rounded-lg bg-white/95 px-4 py-2.5 text-slate-900 shadow-sm">
+              <span className="pokemonFont text-[10px] sm:text-xs text-slate-500">
+                PHONE No.
+              </span>
+              <a
+                href="tel:2482503985"
+                onClick={stopEvent}
+                className="text-sm sm:text-base font-medium hover:text-poke-crimson transition-colors"
+              >
+                248-250-3985
               </a>
-            </h1>
-          </div>
-          <div className="pt-8"></div>
-          <div className="flex w-full flex-col lg:flex-row border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-            <h1>LINKEDIN</h1>
-            <h1 className="font-bold hover:underline" onClick={stopEvent}>
-              <a href="https://linkedin.com/in/azshen23" target="_blank">
-                /azshen23
+            </div>
+
+            <div className="flex items-center justify-between gap-4 rounded-lg bg-white/95 px-4 py-2.5 text-slate-900 shadow-sm">
+              <span className="pokemonFont text-[10px] sm:text-xs text-slate-500">
+                EMAIL
+              </span>
+              <a
+                href="mailto:azshen@umich.edu"
+                onClick={stopEvent}
+                className="text-sm sm:text-base font-semibold hover:text-poke-crimson transition-colors truncate"
+              >
+                azshen@umich.edu
               </a>
-            </h1>
+            </div>
+
+            <div className="flex items-center justify-between gap-4 rounded-lg bg-white/95 px-4 py-2.5 text-slate-900 shadow-sm">
+              <span className="pokemonFont text-[10px] sm:text-xs text-slate-500">
+                GITHUB
+              </span>
+              <a
+                href="https://github.com/azshen23"
+                target="_blank"
+                rel="noreferrer"
+                onClick={stopEvent}
+                className="text-sm sm:text-base font-semibold text-poke-blue hover:text-poke-crimson hover:underline transition-colors"
+              >
+                /azshen23 ↗
+              </a>
+            </div>
+
+            <div className="flex items-center justify-between gap-4 rounded-lg bg-white/95 px-4 py-2.5 text-slate-900 shadow-sm">
+              <span className="pokemonFont text-[10px] sm:text-xs text-slate-500">
+                LINKEDIN
+              </span>
+              <a
+                href="https://linkedin.com/in/azshen23"
+                target="_blank"
+                rel="noreferrer"
+                onClick={stopEvent}
+                className="text-sm sm:text-base font-semibold text-poke-blue hover:text-poke-crimson hover:underline transition-colors"
+              >
+                /azshen23 ↗
+              </a>
+            </div>
+          </div>
+
+          {/* Right Portrait */}
+          <div className="md:col-span-5 flex flex-col items-center justify-center">
+            <div className="relative rounded-2xl border-4 border-white/90 bg-slate-900 overflow-hidden w-44 h-44 sm:w-52 sm:h-52 shadow-xl">
+              <img
+                className="w-full h-full object-cover"
+                src={pfp}
+                alt="Andrew Shen"
+              />
+            </div>
           </div>
         </div>
-        <div className="md:w-2/5 flex flex-col items-center justify-center">
-          <div className="pt-12 md:pt-0"></div>
-          <div className="border rounded-xl overflow-hidden w-56">
-            <img className="w-full h-full " src={pfp} />
+
+        {/* Bottom Meta Row */}
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="flex items-center justify-between rounded-lg bg-white/90 px-4 py-2 text-slate-900">
+            <span className="pokemonFont text-[10px] sm:text-xs text-slate-500">
+              TIME
+            </span>
+            <span className="text-sm font-bold tabular-nums">
+              {formattedTime}
+            </span>
+          </div>
+          <div className="flex items-center justify-between rounded-lg bg-white/90 px-4 py-2 text-slate-900">
+            <span className="pokemonFont text-[10px] sm:text-xs text-slate-500">
+              ADVENTURE STARTED
+            </span>
+            <span className="text-sm font-semibold">
+              <strong>Jun.</strong> 24, 2001
+            </span>
           </div>
         </div>
       </div>
-      <div className="pt-12"></div>
-      <div className="text-center md:text-start">
-        <div className="flex w-full flex-col lg:flex-row border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-          <h1>TIME</h1>
-          <h1>{formattedTime}</h1>
-        </div>
-        <div className="pt-2"></div>
-        <div className="flex w-full flex-col lg:flex-row border rounded justify-between bg-white bg-opacity-75  p-1 pt-2 pb-0">
-          <h1>ADVENTURE STARTED</h1>
-          <h1>
-            <span className="font-bold">Jun.</span> 24, 2001
-          </h1>
-        </div>
-      </div>
-      <div className="pt-12 lg:pt-0"></div>
-    </motion.div>
+    </div>
   );
 }
 
