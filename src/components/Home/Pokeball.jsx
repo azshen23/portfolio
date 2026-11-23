@@ -1,4 +1,4 @@
-import { MathUtils, Vector3 } from "three";
+import { MathUtils, Vector3, MeshLambertMaterial, DoubleSide } from "three";
 import { useRef, useEffect, useMemo } from "react";
 import { useGLTF, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
@@ -38,13 +38,26 @@ export default function Pokeball({ getZoomed, getZoomedOut }) {
     return merged;
   }, [scene]);
 
+  // Lightweight Lambert material for matte town geometry (avoids heavy MeshPhysicalMaterial IOR/specular shader)
+  const townMaterial = useMemo(() => {
+    const tex = materials.Town_mat?.map ?? null;
+    if (tex) {
+      tex.anisotropy = 4;
+    }
+    return new MeshLambertMaterial({
+      map: tex,
+      side: DoubleSide,
+    });
+  }, [materials]);
+
   useEffect(() => {
     return () => {
       if (mergedTownGeometry) {
         mergedTownGeometry.dispose();
       }
+      townMaterial.dispose();
     };
-  }, [mergedTownGeometry]);
+  }, [mergedTownGeometry, townMaterial]);
 
   useEffect(() => {
     if (materials.Pokeball_mat) {
@@ -52,16 +65,6 @@ export default function Pokeball({ getZoomed, getZoomedOut }) {
       materials.Pokeball_mat.metalness = 0.4;
       materials.Pokeball_mat.envMapIntensity = 1.4;
       materials.Pokeball_mat.needsUpdate = true;
-    }
-    if (materials.Town_mat) {
-      materials.Town_mat.roughness = 0.85;
-      materials.Town_mat.metalness = 0;
-      // Skip expensive PMREM cubemap sampling on matte town pixels
-      materials.Town_mat.envMapIntensity = 0;
-      if (materials.Town_mat.map) {
-        materials.Town_mat.map.anisotropy = 8;
-      }
-      materials.Town_mat.needsUpdate = true;
     }
   }, [materials]);
 
@@ -115,19 +118,13 @@ export default function Pokeball({ getZoomed, getZoomedOut }) {
   });
 
   return (
-    <group ref={group} dispose={null} onScroll={scroll}>
-      <pointLight
-        position={[0, 1.6, 1.5]}
-        intensity={0.9}
-        distance={6}
-        color="#fef3c7"
-      />
+    <group ref={group} dispose={null}>
       <group name="Scene">
         {mergedTownGeometry && (
           <mesh
             name="MergedTwinleafTown"
             geometry={mergedTownGeometry}
-            material={materials.Town_mat}
+            material={townMaterial}
           />
         )}
         <mesh

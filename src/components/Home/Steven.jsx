@@ -60,10 +60,15 @@ export default function Steven({ isZoomed = false, ...props }) {
   const { actions } = useAnimations(wavingAnimation, group);
 
   useEffect(() => {
-    if (actions["Waving"]) {
-      actions["Waving"].play();
+    const waving = actions["Waving"];
+    if (!waving) return;
+    waving.play();
+    if (!isZoomed) {
+      waving.paused = true;
+    } else if (!wasMoving.current) {
+      waving.paused = false;
     }
-  }, [actions]);
+  }, [actions, isZoomed]);
 
   // Cache skeleton bone references & rest rotations once
   useEffect(() => {
