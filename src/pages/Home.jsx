@@ -86,7 +86,7 @@ export default function Home() {
         className="w-full h-full block"
       >
         <color attach="background" args={["#070b16"]} />
-        <fog attach="fog" args={["#070b16", 14, 45]} />
+        <fog attach="fog" args={["#070b16", 26, 80]} />
 
         {/* 3-Point Studio + Space Lighting */}
         <ambientLight intensity={0.45} color="#cbd5e1" />

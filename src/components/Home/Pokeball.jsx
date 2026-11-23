@@ -43,11 +43,15 @@ export default function Pokeball({ getZoomed, getZoomedOut }) {
       0.2
     );
 
+    const zoomedOutZ = state.viewport.aspect < 1 ? 15.5 : 12.8;
+    const t = MathUtils.clamp((offset - 0.14) / 0.86, 0, 1);
+    const eased = t * t * (3 - 2 * t);
+
     const targetCamY = zoomedIn ? 0.4 : 0.25;
     const targetLookY = zoomedIn ? 0.16 : 0.05;
     const targetCamZ = zoomedIn
       ? fullZoomValue
-      : Math.max(fullZoomValue, Math.sin((offset * Math.PI) / 3) * 10);
+      : MathUtils.lerp(fullZoomValue, zoomedOutZ, eased);
 
     state.camera.position.y = MathUtils.lerp(
       state.camera.position.y,
