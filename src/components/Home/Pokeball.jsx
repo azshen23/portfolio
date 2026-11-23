@@ -1,19 +1,41 @@
-import { MathUtils } from "three";
-import { useRef } from "react";
+import { MathUtils, Vector3 } from "three";
+import { useRef, useEffect } from "react";
 import { useGLTF, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 const rsqw = (t, delta = 0.1, a = 1, f = 1 / (2 * Math.PI)) =>
   (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
-const fullZoomValue = Math.sin((0.125 * Math.PI) / 3) * 10;
+const fullZoomValue = 2.05;
+const lookAtTarget = new Vector3(0, 0, 1);
+
 export default function Pokeball({ getZoomed, getZoomedOut }) {
   const group = useRef();
   const pokeBallTop = useRef();
+  const prevZoomed = useRef(false);
+  const prevZoomedOut = useRef(true);
   const { nodes, materials } = useGLTF("/models/twinleafBall.glb");
   const scroll = useScroll();
+
+  useEffect(() => {
+    if (materials.Pokeball_mat) {
+      materials.Pokeball_mat.roughness = 0.2;
+      materials.Pokeball_mat.metalness = 0.4;
+      materials.Pokeball_mat.envMapIntensity = 1.4;
+      materials.Pokeball_mat.needsUpdate = true;
+    }
+    if (materials.Town_mat) {
+      materials.Town_mat.roughness = 0.78;
+      materials.Town_mat.metalness = 0.05;
+      if (materials.Town_mat.map) {
+        materials.Town_mat.map.anisotropy = 16;
+      }
+      materials.Town_mat.needsUpdate = true;
+    }
+  }, [materials]);
 
   useFrame((state) => {
     const offset = 1 - scroll.offset;
     const r1 = scroll.range(1 / 4, 4 / 4);
+    const zoomedIn = offset <= 0.14;
 
     pokeBallTop.current.rotation.x = MathUtils.lerp(
       pokeBallTop.current.rotation.x,
@@ -21,27 +43,45 @@ export default function Pokeball({ getZoomed, getZoomedOut }) {
       0.2
     );
 
-    state.camera.position.y = 0.25;
-    if (offset > 0.14) {
-      state.camera.position.z = MathUtils.lerp(
-        state.camera.position.z,
-        Math.sin((offset * Math.PI) / 3) * 10,
-        0.2
-      );
-    } else {
-      state.camera.position.z = MathUtils.lerp(
-        state.camera.position.z,
-        fullZoomValue,
-        0.2
-      );
-    }
-    state.camera.lookAt(0, 0, 1);
+    const targetCamY = zoomedIn ? 0.4 : 0.25;
+    const targetLookY = zoomedIn ? 0.16 : 0.05;
+    const targetCamZ = zoomedIn
+      ? fullZoomValue
+      : Math.max(fullZoomValue, Math.sin((offset * Math.PI) / 3) * 10);
 
-    getZoomed(offset < 0.14);
-    getZoomedOut(offset > 0.7);
+    state.camera.position.y = MathUtils.lerp(
+      state.camera.position.y,
+      targetCamY,
+      0.15
+    );
+    state.camera.position.z = MathUtils.lerp(
+      state.camera.position.z,
+      targetCamZ,
+      0.2
+    );
+    lookAtTarget.y = MathUtils.lerp(lookAtTarget.y, targetLookY, 0.15);
+    state.camera.lookAt(lookAtTarget);
+
+    const isNowZoomed = offset < 0.14;
+    if (isNowZoomed !== prevZoomed.current) {
+      prevZoomed.current = isNowZoomed;
+      getZoomed(isNowZoomed);
+    }
+
+    const isNowZoomedOut = offset > 0.7;
+    if (isNowZoomedOut !== prevZoomedOut.current) {
+      prevZoomedOut.current = isNowZoomedOut;
+      getZoomedOut(isNowZoomedOut);
+    }
   });
   return (
     <group ref={group} dispose={null} onScroll={scroll}>
+      <pointLight
+        position={[0, 1.6, 1.5]}
+        intensity={0.9}
+        distance={6}
+        color="#fef3c7"
+      />
       <group name="Scene">
         <mesh
           name="House01"
