@@ -4,19 +4,238 @@ Command: npx gltfjsx@6.2.10 src/assets/steven.glb
 */
 
 import { useRef, useEffect } from "react";
+import { MathUtils } from "three";
 import { useGLTF, useFBX, useAnimations } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
-export default function Steven(props) {
+const MOVE_SPEED = 0.75;
+const OUTER_BOUNDS = {
+  minX: -0.95,
+  maxX: 0.95,
+  minZ: -1.15,
+  maxZ: 1.15,
+};
+
+// AABB colliders (with Steven's radius padded in) for Twinleaf Town buildings & props
+const OBSTACLES = [
+  // House01 (top-right)
+  { minX: 0.16, maxX: 1.08, minZ: -1.22, maxZ: -0.42 },
+  // House02 (top-left)
+  { minX: -1.2, maxX: -0.28, minZ: -1.25, maxZ: -0.45 },
+  // House003 (bottom-left)
+  { minX: -1.2, maxX: -0.22, minZ: 0.04, maxZ: 0.88 },
+  // House004 (bottom-right)
+  { minX: 0.24, maxX: 1.2, minZ: -0.02, maxZ: 0.82 },
+  // Mailbox001 (right path)
+  { minX: 0.19, maxX: 0.38, minZ: 0.58, maxZ: 0.77 },
+  // Mailbox (left path)
+  { minX: -0.44, maxX: -0.25, minZ: -0.66, maxZ: -0.48 },
+  // Sign (center-right)
+  { minX: 0.03, maxX: 0.2, minZ: -0.3, maxZ: -0.12 },
+];
+
+function hitsObstacle(x, z) {
+  for (let i = 0; i < OBSTACLES.length; i++) {
+    const o = OBSTACLES[i];
+    if (x >= o.minX && x <= o.maxX && z >= o.minZ && z <= o.maxZ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export default function Steven({ isZoomed = false, ...props }) {
   const group = useRef();
-  const { nodes, materials } = useGLTF("/models/steven.glb");
+  const keys = useRef({});
+  const targetRotY = useRef(0);
+  const walkPhase = useRef(0);
+  const wasMoving = useRef(false);
+  const bonesRef = useRef(null);
+  const restPoseRef = useRef({});
 
+  const { nodes, materials } = useGLTF("/models/steven.glb");
   const { animations: wavingAnimation } = useFBX("/models/Waving.fbx");
 
   wavingAnimation[0].name = "Waving";
   const { actions } = useAnimations(wavingAnimation, group);
 
   useEffect(() => {
-    actions["Waving"].play();
+    if (actions["Waving"]) {
+      actions["Waving"].play();
+    }
+  }, [actions]);
+
+  // Cache skeleton bone references & rest rotations once
+  useEffect(() => {
+    if (!nodes.Origin) return;
+    const boneNames = [
+      "LThigh",
+      "RThigh",
+      "LLeg",
+      "RLeg",
+      "LArmA",
+      "RArmA",
+      "Hips",
+    ];
+    const found = {};
+    const rest = {};
+    nodes.Origin.traverse((obj) => {
+      if (boneNames.includes(obj.name)) {
+        found[obj.name] = obj;
+        rest[obj.name] = {
+          rx: obj.rotation.x,
+          ry: obj.rotation.y,
+          rz: obj.rotation.z,
+          py: obj.position.y,
+        };
+      }
+    });
+    bonesRef.current = found;
+    restPoseRef.current = rest;
+  }, [nodes]);
+
+  useEffect(() => {
+    [
+      materials.rstr0012_00_fi_body,
+      materials.rstr0012_00_fi_face,
+      materials.rstr0012_00_fi_head,
+    ].forEach((mat) => {
+      if (mat) {
+        mat.roughness = 0.55;
+        mat.metalness = 0.12;
+        mat.needsUpdate = true;
+      }
+    });
+  }, [materials]);
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      const code = e.code;
+      if (
+        isZoomed &&
+        (code === "ArrowUp" ||
+          code === "ArrowDown" ||
+          code === "ArrowLeft" ||
+          code === "ArrowRight")
+      ) {
+        e.preventDefault();
+      }
+      keys.current[code] = true;
+    };
+
+    const onKeyUp = (e) => {
+      keys.current[e.code] = false;
+    };
+
+    const onBlur = () => {
+      keys.current = {};
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
+    window.addEventListener("blur", onBlur);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("blur", onBlur);
+    };
+  }, [isZoomed]);
+
+  useFrame((_, delta) => {
+    if (!group.current) return;
+    const waving = actions["Waving"];
+    const bones = bonesRef.current;
+    const rest = restPoseRef.current;
+
+    if (!isZoomed) {
+      group.current.position.x = MathUtils.lerp(group.current.position.x, 0, 0.12);
+      group.current.position.z = MathUtils.lerp(group.current.position.z, 1, 0.12);
+      group.current.rotation.y = MathUtils.lerp(group.current.rotation.y, 0, 0.12);
+      targetRotY.current = 0;
+      if (wasMoving.current && waving) {
+        waving.paused = false;
+        wasMoving.current = false;
+      }
+      return;
+    }
+
+    const k = keys.current;
+    let dx = 0;
+    let dz = 0;
+
+    if (k.ArrowLeft || k.KeyA) dx -= 1;
+    if (k.ArrowRight || k.KeyD) dx += 1;
+    if (k.ArrowUp || k.KeyW) dz -= 1;
+    if (k.ArrowDown || k.KeyS) dz += 1;
+
+    const isMoving = dx !== 0 || dz !== 0;
+
+    if (isMoving) {
+      if (!wasMoving.current && waving) {
+        // Keep Waving active at t=0 (paused) so mixer keeps Origin/Hips upright
+        waving.time = 0;
+        waving.paused = true;
+      }
+      wasMoving.current = true;
+
+      const len = Math.hypot(dx, dz);
+      dx /= len;
+      dz /= len;
+
+      const step = Math.min(delta, 0.05) * MOVE_SPEED;
+      const curX = group.current.position.x;
+      const curZ = group.current.position.z;
+
+      // Resolve X and Z separately for smooth wall sliding around houses
+      const nextX = MathUtils.clamp(
+        curX + dx * step,
+        OUTER_BOUNDS.minX,
+        OUTER_BOUNDS.maxX
+      );
+      if (!hitsObstacle(nextX, curZ)) {
+        group.current.position.x = nextX;
+      }
+
+      const nextZ = MathUtils.clamp(
+        curZ + dz * step,
+        OUTER_BOUNDS.minZ,
+        OUTER_BOUNDS.maxZ
+      );
+      if (!hitsObstacle(group.current.position.x, nextZ)) {
+        group.current.position.z = nextZ;
+      }
+
+      targetRotY.current = Math.atan2(dx, dz);
+
+      // Procedural leg & arm walk cycle (runs after mixer.update)
+      walkPhase.current += Math.min(delta, 0.05) * 10;
+      const swing = Math.sin(walkPhase.current) * 0.55;
+      const kneeL = Math.max(0, Math.cos(walkPhase.current)) * 0.6;
+      const kneeR = Math.max(0, -Math.cos(walkPhase.current)) * 0.6;
+
+      if (bones && rest.LThigh) {
+        bones.LThigh.rotation.x = swing;
+        bones.RThigh.rotation.x = -swing;
+        bones.LLeg.rotation.x = kneeL;
+        bones.RLeg.rotation.x = kneeR;
+        bones.LArmA.rotation.z = -1.1;
+        bones.RArmA.rotation.z = 1.1;
+        bones.LArmA.rotation.x = -swing * 0.5;
+        bones.RArmA.rotation.x = swing * 0.5;
+      }
+    } else if (wasMoving.current) {
+      wasMoving.current = false;
+      if (waving) {
+        waving.paused = false;
+      }
+    }
+
+    // Shortest-path angular lerp so he turns smoothly
+    const currentY = group.current.rotation.y;
+    let diff = targetRotY.current - currentY;
+    while (diff > Math.PI) diff -= Math.PI * 2;
+    while (diff < -Math.PI) diff += Math.PI * 2;
+    group.current.rotation.y = currentY + diff * 0.18;
   });
 
   return (
