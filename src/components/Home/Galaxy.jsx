@@ -16,10 +16,15 @@ export default function Galaxy(props) {
 
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
-    if (actions["Global Rotation"]) {
-      actions["Global Rotation"].play();
+    const rot = actions["Global Rotation"];
+    if (!rot) return;
+    if (props.visible === false) {
+      rot.paused = true;
+    } else {
+      rot.paused = false;
+      rot.play();
     }
-  }, [actions]);
+  }, [actions, props.visible]);
   return (
     <group ref={group} {...props} dispose={null} scale={10} position-z={-10}>
       <group name="Sketchfab_Scene">

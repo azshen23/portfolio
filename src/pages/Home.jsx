@@ -1,9 +1,8 @@
 import { Canvas } from "@react-three/fiber";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import {
   ScrollControls,
   Stars,
-  Sparkles,
   Environment,
   Lightformer,
   ContactShadows,
@@ -15,33 +14,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import BrandLogo from "../components/BrandLogo";
 
-const container = {
-  hidden: { opacity: 0 },
-  visible: (i = 1) => ({
-    opacity: 1,
-    transition: { staggerChildren: 0.025, delayChildren: 0.02 * i },
-  }),
-};
-
-const child = {
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      damping: 16,
-      stiffness: 180,
-    },
-  },
-  hidden: {
-    opacity: 0,
-    y: 4,
-  },
-};
-
 const dialogueText =
   "Hello! My name is Andrew and I am a Full Stack Software Engineer and Consultant. Check out these links to learn more!";
-const words = dialogueText.split("");
 
 const navChoices = [
   { to: "/about", label: "About Me", badge: "TRAINER" },
@@ -52,21 +26,40 @@ const navChoices = [
 export default function Home() {
   const [isZoomed, setZoomed] = useState(false);
   const [isZoomedOut, setZoomedOut] = useState(true);
-  const [dialogueFin, setDialogueFin] = useState(false);
-  const [isSkipped, setIsSkipped] = useState(false);
+  const [typedCount, setTypedCount] = useState(0);
+
+  const dialogueFin = typedCount >= dialogueText.length;
+
+  useEffect(() => {
+    if (!isZoomed) {
+      setTypedCount(0);
+      return;
+    }
+    if (typedCount >= dialogueText.length) return;
+
+    const timer = setInterval(() => {
+      setTypedCount((c) => {
+        if (c + 2 >= dialogueText.length) {
+          clearInterval(timer);
+          return dialogueText.length;
+        }
+        return c + 2;
+      });
+    }, 28);
+
+    return () => clearInterval(timer);
+  }, [isZoomed, typedCount]);
 
   const getZoomed = (zoom) => {
     setZoomed(zoom);
-    if (zoom === false) {
-      setDialogueFin(false);
-      setIsSkipped(false);
+    if (!zoom) {
+      setTypedCount(0);
     }
   };
 
   const skip = () => {
     if (!dialogueFin) {
-      setIsSkipped(true);
-      setDialogueFin(true);
+      setTypedCount(dialogueText.length);
     }
   };
 
@@ -74,13 +67,11 @@ export default function Home() {
     setZoomedOut(zoom);
   };
 
-  const memoizedWords = useMemo(() => words, []);
-
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-poke-ink select-none">
       {/* 3D Canvas */}
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={[1, 1.25]}
         gl={{ powerPreference: "high-performance", antialias: true }}
         camera={{ fov: 50, near: 0.1, far: 200 }}
         className="w-full h-full block"
@@ -95,7 +86,6 @@ export default function Home() {
           position={[4, 6, 5]}
           intensity={2.1}
           color="#fff7ed"
-          castShadow
         />
         <directionalLight
           position={[-5, 2, -3]}
@@ -112,19 +102,11 @@ export default function Home() {
         <Stars
           radius={55}
           depth={35}
-          count={2200}
+          count={900}
           factor={3.5}
           saturation={0.35}
           fade
-          speed={0.5}
-        />
-        <Sparkles
-          count={40}
-          scale={5}
-          size={2}
-          speed={0.3}
-          opacity={0.55}
-          color="#93c5fd"
+          speed={0.25}
         />
 
         <ScrollControls pages={2} damping={0.12}>
@@ -133,18 +115,19 @@ export default function Home() {
           <ContactShadows
             position={[0, 0.01, 0.6]}
             frames={1}
-            resolution={256}
+            resolution={128}
             opacity={0.4}
             scale={4}
             blur={2.2}
             far={1.5}
             color="#0f172a"
           />
-          <Galaxy />
+          {/* Skip rendering 90k-tri galaxy behind the town once zoomed inside */}
+          <Galaxy visible={!isZoomed} />
         </ScrollControls>
 
-        {/* Studio PBR Environment Reflections */}
-        <Environment resolution={256}>
+        {/* Studio PBR Environment Reflections (Pokeball_mat only) */}
+        <Environment resolution={128}>
           <group rotation={[-Math.PI / 3, 0, 1]}>
             <Lightformer
               form="circle"
@@ -188,7 +171,7 @@ export default function Home() {
 
         <nav
           aria-label="Quick navigation"
-          className="pointer-events-auto flex items-center gap-1 sm:gap-2 rounded-full bg-poke-surface/80 backdrop-blur-md border border-slate-400/20 p-1.5 shadow-lg"
+          className="pointer-events-auto flex items-center gap-1 sm:gap-2 rounded-full bg-poke-surface/90 border border-slate-400/20 p-1.5 shadow-lg"
         >
           {navChoices.map((item) => (
             <Link
@@ -212,7 +195,7 @@ export default function Home() {
             transition={{ duration: 0.35 }}
             className="pointer-events-none fixed bottom-8 sm:bottom-12 left-0 right-0 z-20 flex flex-col items-center gap-3 px-4"
           >
-            <div className="flex items-center gap-3 rounded-full bg-poke-surface/85 backdrop-blur-md border border-slate-400/25 px-5 py-2.5 shadow-xl">
+            <div className="flex items-center gap-3 rounded-full bg-poke-surface/90 border border-slate-400/25 px-5 py-2.5 shadow-xl">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-poke-crimson opacity-75" />
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-poke-crimson" />
@@ -304,22 +287,7 @@ export default function Home() {
               </div>
 
               <div className="pokemonFont text-xs sm:text-sm md:text-base leading-relaxed sm:leading-loose text-slate-900 pr-6">
-                {isSkipped ? (
-                  <span>{dialogueText}</span>
-                ) : (
-                  <motion.div
-                    variants={container}
-                    initial="hidden"
-                    animate="visible"
-                    onAnimationComplete={() => setDialogueFin(true)}
-                  >
-                    {memoizedWords.map((char, index) => (
-                      <motion.span variants={child} key={index}>
-                        {char}
-                      </motion.span>
-                    ))}
-                  </motion.div>
-                )}
+                <span>{dialogueText.slice(0, typedCount)}</span>
               </div>
 
               {/* Next / Skip indicator */}
