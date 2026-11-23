@@ -11,8 +11,32 @@ import ScreenWrapper from "../components/ScreenWrapper";
 
 const allProjects = [
   {
-    id: "divewithive",
+    id: "genshin-krillion",
     dexNumber: "001",
+    title: "Genshin Krillion",
+    link: "https://genshinkrillion.com/",
+    monogram: "KRIL",
+    subtitle: "Abyssal Trivia Dive",
+    accentColor: "#38BDF8",
+    description:
+      "Daily Genshin Impact rarity-trivia game where naming rarer valid answers plunges Furina's Hat deeper before the 25-second timer runs out.",
+    tags: ["All", "React", "TypeScript", "AI / Gemini"],
+  },
+  {
+    id: "cdcheck",
+    dexNumber: "002",
+    title: "CDcheck",
+    link: "https://cdcheck.lol/",
+    monogram: "CD",
+    subtitle: "Daily LoL Cooldown Game",
+    accentColor: "#C8AA6E",
+    description:
+      "Daily League of Legends ability cooldown challenge & Endless Arcade mode powered by live Riot Data Dragon patch data, Bun, and React.",
+    tags: ["All", "React", "TypeScript"],
+  },
+  {
+    id: "divewithive",
+    dexNumber: "003",
     title: "Dive with IVE",
     link: "https://divewithive.com",
     repoLink: "https://github.com/azshen23/divewithive",
@@ -25,7 +49,7 @@ const allProjects = [
   },
   {
     id: "kpopduel",
-    dexNumber: "002",
+    dexNumber: "004",
     title: "KpopDuel",
     link: "https://github.com/azshen23/KpopDuel",
     repoLink: "https://github.com/azshen23/KpopDuelBE",
@@ -39,7 +63,7 @@ const allProjects = [
   },
   {
     id: "nei",
-    dexNumber: "003",
+    dexNumber: "005",
     title: "Nutrition Education Initiative",
     link: "https://nutrition-education-initiative.vercel.app",
     repoLink: "https://github.com/azshen23/Nutrition-Education-Initiative",
@@ -52,7 +76,7 @@ const allProjects = [
   },
   {
     id: "raining",
-    dexNumber: "004",
+    dexNumber: "006",
     title: "Raining Consulting",
     link: "https://raining.dev",
     logoColor: rainingColor,
@@ -64,7 +88,7 @@ const allProjects = [
   },
   {
     id: "nuocal",
-    dexNumber: "005",
+    dexNumber: "007",
     title: "nuocal",
     link: "https://github.com/azshen23/nuocal-app",
     logoColor: nuocalColor,
@@ -76,7 +100,7 @@ const allProjects = [
   },
   {
     id: "connect",
-    dexNumber: "006",
+    dexNumber: "008",
     title: "Connect",
     link: "https://github.com/azshen23/Connect",
     logoColor: connectColor,
