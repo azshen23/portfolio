@@ -1,98 +1,134 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
-import logo from "/src/assets/images/svg/logo-no-background.svg";
+import { Link, useLocation } from "react-router-dom";
+import BrandLogo from "./BrandLogo";
+
+const navItems = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/projects", label: "Projects" },
+  { to: "/contact", label: "Contact" },
+];
 
 function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { pathname } = useLocation();
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
-  };
   return (
-    <div className="flex flex-col items-center w-full">
-      <div
-        className="box w-full mt-5 bg-white hidden md:flex flex-row  pt-8 pb-8
-      items-center justify-between pl-2 pr-2 lg:pl-10 lg:pr-10 xl:pl-20 xl:pr-20 pokemonFont border-4 border-white"
-      >
-        <div className="w-24 xl:w-36">
-          <Link to="/">
-            <motion.img
-              whileHover={{ scale: 1.2 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              src={logo}
-            />
-          </Link>
-        </div>
-        <div className="flex flex-row justify-between space-x-5 lg:space-x-10 lg:text-base xl:text-lg font-bold">
-          <Link to="/" className="hover:underline hover:text-red-600 transition-colors duration-200">
-            Home
-          </Link>
-          <Link to="/about" className="hover:underline hover:text-red-600 transition-colors duration-200">
-            About
-          </Link>
-          <Link to="/projects" className="hover:underline hover:text-red-600 transition-colors duration-200">
-            Projects
-          </Link>
-
-          <Link to="/contact" className="hover:underline hover:text-red-600 transition-colors duration-200">
-            Contact
-          </Link>
-        </div>
-      </div>
-      <div className="md:hidden w-full">
-        <div className="flex flex-col box bg-white items-center p-5 pokemonFont border-4 border-white w-full">
-          <div className="w-full flex flex-row justify-between ">
-            <div className="w-36">
-              <Link to="/">
-                <img src={logo} />
-              </Link>
-            </div>
-            <button
-              onClick={toggleMobileMenu}
-              className="text-xl focus:outline-none"
-            >
-              <svg
-                className="h-6 w-6 text-gray-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
+    <header className="sticky top-0 z-40 pt-4 sm:pt-6">
+      <div className="rpg-panel flex items-center justify-between px-4 sm:px-6 py-3">
+        <Link
+          to="/"
+          className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-poke-gold rounded-lg"
+        >
+          <motion.div
+            whileHover={{ scale: 1.08, rotate: -6 }}
+            transition={{ type: "spring", stiffness: 400, damping: 18 }}
+          >
+            <BrandLogo className="h-9 w-9" />
+          </motion.div>
+          <div className="flex flex-col">
+            <span className="pokemonFont text-xs sm:text-sm text-white tracking-wide">
+              ANDREW SHEN
+            </span>
+            <span className="text-[11px] font-medium text-slate-400 hidden sm:block">
+              Full Stack Engineer &amp; Consultant
+            </span>
           </div>
-        </div>
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              className="flex flex-col box border-4 bg-white absolute top-20 right-2 items-center w-1/2 pt-4 pb-4 space-y-2 z-50"
-              initial={{ x: 300, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -300, opacity: 0 }}
-            >
-              <Link to="/" className="hover:underline">
-                Home
+        </Link>
+
+        {/* Desktop Nav */}
+        <nav aria-label="Primary" className="hidden md:flex items-center gap-1.5">
+          {navItems.map((item) => {
+            const isActive = pathname === item.to;
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-poke-gold ${
+                  isActive
+                    ? "bg-poke-crimson text-white shadow-sm"
+                    : "text-slate-300 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  {isActive && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-poke-gold" />
+                  )}
+                  {item.label}
+                </span>
               </Link>
-              <Link to="/about" className="hover:underline ">
-                About
-              </Link>
-              <Link to="/projects" className="hover:underline ">
-                Projects
-              </Link>
-              <Link to="/contact" className="hover:underline">
-                Contact
-              </Link>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            );
+          })}
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          type="button"
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          aria-expanded={isMobileMenuOpen}
+          aria-label="Toggle navigation menu"
+          className="md:hidden inline-flex items-center justify-center rounded-lg p-2 text-slate-200 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-poke-gold"
+        >
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            {isMobileMenuOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+        </button>
       </div>
-    </div>
+
+      {/* Mobile Dropdown */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.nav
+            aria-label="Mobile navigation"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+            className="md:hidden mt-2 rpg-panel p-3 flex flex-col gap-1"
+          >
+            {navItems.map((item) => {
+              const isActive = pathname === item.to;
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center justify-between rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                    isActive
+                      ? "bg-poke-crimson text-white"
+                      : "text-slate-200 hover:bg-white/10"
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  {isActive && (
+                    <span className="h-2 w-2 rounded-full bg-poke-gold" />
+                  )}
+                </Link>
+              );
+            })}
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }
 
